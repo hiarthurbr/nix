@@ -88,7 +88,7 @@
   services.libinput.enable = true;
 
   services.zerotierone = {
-    # enable = true;
+    enable = true;
     joinNetworks = [
       "9bee8941b58a36d3"
     ];
