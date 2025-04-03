@@ -1,0 +1,46 @@
+{
+  description = "flake for hiarthurbr with Home Manager enabled";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake"
+  };
+
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    home-manager,
+    zen-browser,
+    ...
+  }: {
+    nixosConfigurations = {
+      yourHostNameGoesHere = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.hiarthurbr = { pkgs, ... }: {
+              home.username = "hiarthurbr";
+              home.homeDirectory = "/home/hiarthurbr";
+              programs.home-manager.enable = true;
+              home.packages = with pkgs; [];
+              home.stateVersion = "23.05";
+              programs.git = {
+                enable = true;
+                userName = "hiarthurbr";
+                userEmail = "hi@arthurbr.me";
+                extraConfig = {
+                  init.defaultBranch = "master";
+                  
+            };
+          }
+        ];
+      };
+    };
+  };
+}
