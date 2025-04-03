@@ -70,10 +70,16 @@
       rebuild = "sudo nixos-rebuild switch --show-trace";
       update = "nix-channel --update";
       upgrade = "nix-env --upgrade";
+      push = "git push -u (git remote show) ((git branch --no-color | lines | where (str starts-with '*')).0 | str trim -c '*' | str trim)";
     };
 
     configFile.text = ''
       $env.config.show_banner = false;
+
+      def commit-all [message: string] {
+        git add .
+        git commit -S -m $message
+      }
 
       # Define a function to open a project in a nix-shell environment.
       def open-project [project: string] {
