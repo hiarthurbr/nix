@@ -83,7 +83,7 @@
   services.libinput.enable = true;
 
   services.zerotierone = {
-    enable = true;
+    # enable = true;
     joinNetworks = [
       "9bee8941b58a36d3"
     ];
@@ -96,9 +96,6 @@
     description = "Arthur Bufalo Rodrigues";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAmxmSPr+7thMsxEpjAP0KJI13iJAvifG9LeqBX/nJWV hiarthurbr@nixos"
-    ];
   };
 
   services.openssh = {
