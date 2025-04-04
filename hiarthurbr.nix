@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     kitty ghostty warp-terminal
     inputs.zen-browser.packages."${system}".beta
-    fish protonmail-bridge proton-pass starship nushell input-leap
+    fish protonmail-bridge protonmail-bridge-gui proton-pass starship nushell input-leap
   ];
 
   # Fish shell init script
