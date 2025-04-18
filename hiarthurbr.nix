@@ -68,13 +68,22 @@
     shellAliases = {
       zed = "zeditor";
       rebuild = "sudo nixos-rebuild switch --show-trace --flake git+https://github.com/hiarthurbr/nix --refresh";
-      update = "nix-channel --update";
-      upgrade = "nix-env --upgrade";
+      # update = "nix-channel --update";
+      # upgrade = "nix-env --upgrade";
       push = "git push -u (git remote show) ((git branch --no-color | lines | where (str starts-with '*')).0 | str trim -c '*' | str trim)";
     };
 
     configFile.text = ''
       $env.config.show_banner = false;
+
+      def update [] {
+        let _old_cwd = $env.PWD
+        cd /etc/nixos
+        sudo nix flake update
+        nix-channel --update
+        nix-env --upgrade
+        cd $_old_cwd
+      }
 
       def commit-all [message: string] {
         git add .
