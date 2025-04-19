@@ -21,7 +21,8 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "hiarthurbr-nixos"; # Define your hostname.
-  networking.firewall.allowedTCPPorts = [ 3000 5173 ];
+  networking.firewall.allowedTCPPorts = [ 3000 5173 8080 ];
+  networking.firewall.allowedUDPPorts = [ 3000 5173 8080 ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
