@@ -21,13 +21,13 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "hiarthurbr-nixos"; # Define your hostname.
-  networking.firewall.allowedTCPPorts = [
+  networking.firewall.allowedTCPPortRanges = [
     {
       from = 1024;
       to = 65535;
     }
   ];
-  networking.firewall.allowedUDPPorts = [
+  networking.firewall.allowedUDPPortRanges = [
     {
       from = 1024;
       to = 65535;
