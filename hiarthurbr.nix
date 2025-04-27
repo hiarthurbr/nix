@@ -120,7 +120,7 @@
           print ($aliases | wrap "Aliases")
           print ($functions | wrap "Functions")
 
-          nix-shell --show-trace -p ...$packages "--command" $"nu -e 'cd ($project_path); run-external $editor_cmd ($project_path | path expand); ($aliases | str join '; '); ($functions | str join '; ')'"
+          nix-shell --show-trace -p ...$packages "--command" $"nu -e 'cd ($project_path); run-external ($editor_cmd) ($project_path | path expand); ($aliases | str join '; '); ($functions | str join '; ')'"
         } else {
           if ($project_path | path expand | path exists) {
             print $"Error: devenv.json not found in `($project_path)`, creating one..."
