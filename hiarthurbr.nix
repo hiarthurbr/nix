@@ -6,7 +6,7 @@
     inputs.zen-browser.packages."${system}".twilight
     fish protonmail-bridge protonmail-bridge-gui
     proton-pass starship nushell input-leap
-    discord discordo
+    discord discordo commit-mono
   ];
 
   # Fish shell init script
