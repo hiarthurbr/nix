@@ -5,7 +5,7 @@
     kitty ghostty warp-terminal
     inputs.zen-browser.packages."${system}".twilight
     fish protonmail-bridge protonmail-bridge-gui
-    proton-pass starship nushell input-leap
+    proton-pass starship nushell # input-leap
     discord discordo commit-mono
   ];
 
