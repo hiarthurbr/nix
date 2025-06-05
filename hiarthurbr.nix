@@ -1,7 +1,7 @@
 { config, pkgs, system, inputs, ... }:
 
 let 
-  udevmon_config = builtins.readFile ./udevmon.yaml;
+  udevmon_config = ./udevmon.yaml;
 in {
   home.packages = with pkgs; [
     kitty ghostty warp-terminal
