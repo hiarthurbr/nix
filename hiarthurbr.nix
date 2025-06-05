@@ -10,7 +10,7 @@
     uutils-coreutils-noprefix ripgrep fd bat eza zoxide
     xh zellij gitui dust dua yazi hyperfine evil-helix
     cargo-info fselect rusty-man tokei just mprocs kondo
-    interception-tools-plugins.caps2esc
+    interception-tools interception-tools-plugins.caps2esc
   ];
 
   systemd.user.services.caps2esc = {
