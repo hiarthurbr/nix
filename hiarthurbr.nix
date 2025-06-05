@@ -26,7 +26,7 @@ in {
     };
 
     Service = {
-      ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools-plugins.caps2esc}/bin/udevmon -c ${udevmon_config}";
+      ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
       RemainAfterExit = true;
     };
   };
