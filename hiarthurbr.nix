@@ -18,7 +18,7 @@ in {
   systemd.user.services.caps2esc = {
     Unit = {
       Description = "caps2esc daemon";
-      After="systemd-user-sessions.service"
+      After="systemd-user-sessions.service";
     };
 
     Install = {
