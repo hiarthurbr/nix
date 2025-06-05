@@ -7,6 +7,9 @@
     fish protonmail-bridge protonmail-bridge-gui
     proton-pass starship nushell # input-leap
     discord discordo commit-mono
+    uutils-coreutils-noprefix ripgrep fd bat eza zoxide
+    xh zellij gitui dust dua yazi hyperfine evil-helix helix
+    cargo-info fselect rusty-man tokei just mprocs kondo
   ];
 
   # Fish shell init script
