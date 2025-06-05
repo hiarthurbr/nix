@@ -1,7 +1,15 @@
 { config, pkgs, system, inputs, ... }:
 
 let 
-  udevmon_config = ./udevmon.yaml;
+  udevmon_config = builtins.writeTextFile {
+    name = "udevmon.yaml";
+    text = ''
+      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+        DEVICE:
+          EVENTS:
+            EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+    '';
+  };
 in {
   home.packages = with pkgs; [
     kitty ghostty warp-terminal
