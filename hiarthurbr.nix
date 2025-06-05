@@ -13,17 +13,23 @@
     interception-tools interception-tools-plugins.caps2esc
   ];
 
+  let 
+    udevmon_config = builtin.readFile ./udevmon.yaml
+  in {
+  
+  }
   systemd.user.services.caps2esc = {
     Unit = {
       Description = "caps2esc daemon";
+      After="systemd-user-sessions.service"
     };
 
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = [ "multi-user.target" ];
     };
 
     Service = {
-      ExecStart = "${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc";
+      ExecStart = "${uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools-plugins.caps2esc}/bin/udevmon -c /etc/udevmon.yaml";
       RemainAfterExit = true;
     };
   };
