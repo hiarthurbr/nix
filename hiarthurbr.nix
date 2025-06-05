@@ -23,6 +23,12 @@ in {
     interception-tools interception-tools-plugins.caps2esc
   ];
 
+  security.sudo.enable = false;
+  security.sudo-rs = {
+    enable = true;
+    execWheelOnly = false;
+  };
+
   systemd.user.services.caps2esc = {
     Unit = {
       Description = "caps2esc daemon";
