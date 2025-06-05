@@ -110,7 +110,7 @@
     isNormalUser = true;
     shell = pkgs.nushell;
     description = "Arthur Bufalo Rodrigues";
-    extraGroups = [ "networkmanager" "wheel" "input" "misc" "module" "leds" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [];
   };
 
