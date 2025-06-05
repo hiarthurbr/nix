@@ -1,7 +1,7 @@
 { config, pkgs, system, inputs, ... }:
 
 let 
-  udevmon_config = builtins.writeTextFile {
+  udevmon_config = pkgs.writeTextFile {
     name = "udevmon.yaml";
     text = ''
       - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
