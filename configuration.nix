@@ -124,6 +124,12 @@
     };
   };
 
+  security.sudo.enable = false;
+  security.sudo-rs = {
+    enable = true;
+    execWheelOnly = false;
+  };
+
   # Install firefox.
   programs.firefox.enable = false;
 
