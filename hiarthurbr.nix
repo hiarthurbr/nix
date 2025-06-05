@@ -4,7 +4,7 @@ let
   udevmon_config = pkgs.writeTextFile {
     name = "udevmon.yaml";
     text = ''
-      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+      - JOB: "${pkgs.sudo-rs}/bin/sudo ${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
         DEVICE:
           EVENTS:
             EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
@@ -17,7 +17,7 @@ in {
     fish protonmail-bridge protonmail-bridge-gui
     proton-pass starship nushell # input-leap
     discord discordo commit-mono
-    uutils-coreutils-noprefix ripgrep fd bat eza zoxide
+    uutils-coreutils-noprefix ripgrep fd bat eza zoxide sudo-rs
     xh zellij gitui dust dua yazi hyperfine evil-helix
     cargo-info fselect rusty-man tokei just mprocs kondo
     interception-tools interception-tools-plugins.caps2esc
