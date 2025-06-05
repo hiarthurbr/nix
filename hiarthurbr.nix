@@ -1,6 +1,8 @@
 { config, pkgs, system, inputs, ... }:
 
-{
+let 
+  udevmon_config = builtins.readFile ./udevmon.yaml
+in {
   home.packages = with pkgs; [
     kitty ghostty warp-terminal
     inputs.zen-browser.packages."${system}".twilight
@@ -13,11 +15,6 @@
     interception-tools interception-tools-plugins.caps2esc
   ];
 
-  let 
-    udevmon_config = builtin.readFile ./udevmon.yaml
-  in {
-  
-  }
   systemd.user.services.caps2esc = {
     Unit = {
       Description = "caps2esc daemon";
@@ -29,7 +26,7 @@
     };
 
     Service = {
-      ExecStart = "${uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools-plugins.caps2esc}/bin/udevmon -c /etc/udevmon.yaml";
+      ExecStart = "${uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools-plugins.caps2esc}/bin/udevmon -c ${udevmon_config}";
       RemainAfterExit = true;
     };
   };
