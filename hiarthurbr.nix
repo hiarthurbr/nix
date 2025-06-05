@@ -25,8 +25,8 @@
     Service = {
       ExecStart = "${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc";
       RemainAfterExit = true;
-    }
-  }
+    };
+  };
 
   # Fish shell init script
   # programs.bash.initExtra = ''
