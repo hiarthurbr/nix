@@ -81,7 +81,7 @@ in {
     enable = true;
 
     description = "caps2esc daemon";
-    after = "systemd-user-sessions.service";
+    after = [ "systemd-user-sessions.service" ];
 
     wantedBy = [ "multi-user.target" ];
 
