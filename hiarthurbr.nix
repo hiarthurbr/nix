@@ -21,22 +21,6 @@ in {
     cargo-info rusty-man tokei just kondo
   ];
 
-  systemd.services.caps2esc = {
-    Unit = {
-      Description = "caps2esc daemon";
-      After="systemd-user-sessions.service";
-    };
-
-    Install = {
-      WantedBy = [ "multi-user.target" ];
-    };
-
-    Service = {
-      ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
-      RemainAfterExit = true;
-    };
-  };
-
   # Fish shell init script
   # programs.bash.initExtra = ''
   #   if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} && ${SHLVL} == 1 ]]
