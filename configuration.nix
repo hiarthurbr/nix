@@ -80,20 +80,14 @@ in {
   systemd.services.caps2esc = {
     enable = true;
 
+    description = "caps2esc daemon";
+    after = "systemd-user-sessions.service";
+
+    wantedBy = [ "multi-user.target" ];
+
     serviceConfig = {
-      Unit = {
-        Description = "caps2esc daemon";
-        After="systemd-user-sessions.service";
-      };
-  
-      Install = {
-        WantedBy = [ "multi-user.target" ];
-      };
-  
-      Service = {
-        ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
-        RemainAfterExit = true;
-      };
+      ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
+      RemainAfterExit = true;
     };
   };
 
