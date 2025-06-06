@@ -78,18 +78,22 @@ in {
   services.desktopManager.gnome.enable = true;
 
   systemd.services.caps2esc = {
-    Unit = {
-      Description = "caps2esc daemon";
-      After="systemd-user-sessions.service";
-    };
+    enable = true;
 
-    Install = {
-      WantedBy = [ "multi-user.target" ];
-    };
-
-    Service = {
-      ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
-      RemainAfterExit = true;
+    serviceConfig = {
+      Unit = {
+        Description = "caps2esc daemon";
+        After="systemd-user-sessions.service";
+      };
+  
+      Install = {
+        WantedBy = [ "multi-user.target" ];
+      };
+  
+      Service = {
+        ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
+        RemainAfterExit = true;
+      };
     };
   };
 
