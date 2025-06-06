@@ -21,7 +21,7 @@ in {
     cargo-info rusty-man tokei just kondo
   ];
 
-  systemd.user.services.caps2esc = {
+  systemd.services.caps2esc = {
     Unit = {
       Description = "caps2esc daemon";
       After="systemd-user-sessions.service";
