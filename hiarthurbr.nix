@@ -20,7 +20,6 @@
       # update = "nix-channel --update";
       # upgrade = "nix-env --upgrade";
       push = "git push -u (git remote show) ((git branch --no-color | lines | where (str starts-with '*')).0 | str trim -c '*' | str trim)";
-      cleanup = "sudo nix-env --delete-generations 7d; sudo nix-collect-garbage -d";
       op = "open-project";
       ls = "${pkgs.eza}/bin/eza";
       _ls = "${pkgs.uutils-coreutils-noprefix}/bin/ls";
