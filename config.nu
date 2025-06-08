@@ -56,3 +56,5 @@ def open-project [project: string] {
     } else { print $"Error: `($project_path)` does not exist." }
   }
 }
+
+source ~/.zoxide.nu
