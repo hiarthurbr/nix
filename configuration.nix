@@ -86,7 +86,7 @@ in {
     wantedBy=[ "multi-user.target" ];
 
     serviceConfig = {
-      ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
+      ExecStart = "${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
       RemainAfterExit = true;
       Restart="on-failure";
     };
