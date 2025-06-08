@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    kitty ghostty warp-terminal
+    kitty ghostty jetbrains.rust-rover
     inputs.zen-browser.packages."${system}".twilight
     fish protonmail-bridge protonmail-bridge-gui
     proton-pass starship nushell # input-leap
