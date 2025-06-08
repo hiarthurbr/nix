@@ -5,6 +5,12 @@ def commit-all [message: string] {
   git commit -S -m $message
 }
 
+def cleanup [] {
+  sudo nix-env --delete-generations 7d;
+  nix-store --gc
+  sudo nix-collect-garbage -d
+}
+
 # Define a function to open a project in a nix-shell environment.
 def open-project [project: string] {
   let project_path = $"~/Developer/($project)"
