@@ -1,4 +1,3 @@
-
 $env.config.show_banner = false;
 
 def update [] {
@@ -33,10 +32,10 @@ def open-project [project: string] {
       ($devenv.functions
         | transpose key value
         | each {|entry|
-            let cmd = ($entry.value | get 1)
-            # Generate parameter names as _1, _2, etc.
-            let param_names = $entry.value | get 0 | enumerate | each {|i| ($"_($i.index + 1): ($i.item)")} | str join ", ";
-            ($"def ($entry.key) [($param_names)] { ($cmd) }")
+          let cmd = ($entry.value | get 1)
+          # Generate parameter names as _1, _2, etc.
+          let param_names = $entry.value | get 0 | enumerate | each {|i| ($"_($i.index + 1): ($i.item)")} | str join ", ";
+          ($"def ($entry.key) [($param_names)] { ($cmd) }")
         })
     } else {
       ""
