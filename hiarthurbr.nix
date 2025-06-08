@@ -24,7 +24,6 @@
       op = "open-project";
       ls = "${pkgs.eza}/bin/eza";
       _ls = "${pkgs.uutils-coreutils-noprefix}/bin/ls";
-      
     };
 
     configFile.source = ./config.nu;
