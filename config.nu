@@ -1,14 +1,5 @@
 $env.config.show_banner = false;
 
-def update [] {
-  let _old_cwd = $env.PWD
-  cd /etc/nixos
-  sudo nix flake update
-  nix-channel --update
-  nix-env --upgrade
-  cd $_old_cwd
-}
-
 def commit-all [message: string] {
   git add .
   git commit -S -m $message
@@ -64,10 +55,4 @@ def open-project [project: string] {
       print "Done!"
     } else { print $"Error: `($project_path)` does not exist." }
   }
-}
-
-const starship_config = $nu.data-dir | path join "vendor/autoload"
-if (not (($starship_config | path join "starship.nu") | path exists)) {
-  mkdir $starship_config
-  starship init nu | save -f ($nu.data-dir | path join ($starship_config | path join "starship.nu"))
 }
