@@ -76,9 +76,11 @@
       # upgrade = "nix-env --upgrade";
       push = "git push -u (git remote show) ((git branch --no-color | lines | where (str starts-with '*')).0 | str trim -c '*' | str trim)";
       cleanup = "sudo nix-env --delete-generations 7d; sudo nix-collect-garbage -d";
+      op = "open-project";
     };
 
     configFile.source = ./config.nu;
+    envFile.source = ./env.nu;
   };
 
   programs.git = {
