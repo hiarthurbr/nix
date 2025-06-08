@@ -86,6 +86,7 @@ in {
     after = [ "systemd-udev-settle.service" ];
     requires = [ "systemd-udev-settle.service" ];
     wantedBy=[ "multi-user.target" ];
+    path = [ pkgs.bash ]
 
     serviceConfig = {
       ExecStart = "${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
