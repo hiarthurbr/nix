@@ -79,20 +79,15 @@ in {
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  systemd.services.caps2esc = {
+  services.interception-tools = {
     enable = true;
-
-    description = "caps2esc daemon";
-    after = [ "systemd-udev-settle.service" ];
-    requires = [ "systemd-udev-settle.service" ];
-    wantedBy=[ "multi-user.target" ];
-    path = [ pkgs.bash ]
-
-    serviceConfig = {
-      ExecStart = "${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
-      RemainAfterExit = true;
-      Restart="on-failure";
-    };
+    plugins = [ pkgs.interception-tools-plugins.caps2esc ];
+    udevmonConfig = ''
+      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+        DEVICE:
+          EVENTS:
+            EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+    '';
   };
 
   # Configure keymap in X11
