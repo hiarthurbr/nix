@@ -4,19 +4,7 @@
 
 { config, pkgs, ... }:
 
-# if [ -e ${pkgs.interception-tools}/bin/intercept ]; then echo 1; else echo 0; 
-# ${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE
-let 
-  udevmon_config = pkgs.writeTextFile {
-    name = "udevmon.yaml";
-    text = ''
-      - JOB: "# $DEVNODE"
-        DEVICE:
-          EVENTS:
-            EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-    '';
-  };
-in {
+{
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
