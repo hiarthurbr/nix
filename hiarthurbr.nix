@@ -8,7 +8,7 @@
     proton-pass starship nushell # input-leap
     discord discordo commit-mono
     eza zoxide xh zellij gitui dust dua yazi hyperfine evil-helix
-    cargo-info rusty-man tokei just kondo
+    cargo-info rusty-man tokei just kondo htop btop mprocs
   ];
 
   programs.nushell = {
