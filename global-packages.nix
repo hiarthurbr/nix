@@ -1,7 +1,7 @@
 { pkgs, ... }:
 with pkgs; [
-  vim git wget curl htop btop bat
+  git wget curl
   ripgrep fd bat interception-tools
   interception-tools-plugins.caps2esc
-  fselect uutils-coreutils-noprefix mprocs
+  fselect uutils-coreutils-noprefix
 ]
