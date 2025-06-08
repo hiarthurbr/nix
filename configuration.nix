@@ -81,12 +81,14 @@ in {
     enable = true;
 
     description = "caps2esc daemon";
-    after = [ "multi-user.target" ];
-    requires = [ "multi-user.target" ];
+    after = [ "systemd-udev-settle.service" ];
+    requires = [ "systemd-udev-settle.service" ];
+    wantedBy=[ "multi-user.target" ];
 
     serviceConfig = {
       ExecStart = "${pkgs.uutils-coreutils-noprefix}/bin/nice -n 20 ${pkgs.interception-tools}/bin/udevmon -c ${udevmon_config}";
       RemainAfterExit = true;
+      Restart=on-failure
     };
   };
 
