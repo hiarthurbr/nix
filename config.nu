@@ -66,8 +66,6 @@ def open-project [project: string] {
   }
 }
 
-alias op = open-project
-
 const starship_config = $nu.data-dir | path join "vendor/autoload"
 if (not (($starship_config | path join "starship.nu") | path exists)) {
   mkdir $starship_config
