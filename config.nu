@@ -20,9 +20,11 @@ def open-project [project: string] {
     let devenv = open ($devenv_path | path expand)
     let packages = ($devenv.packages | each {|p| ["-p", $p] } | flatten)
     let editor_cmd = $devenv.editor
-    let aliases = ($devenv.commands
-                  | transpose key value
-                  | each {|entry| ($"alias ($entry.key) = ($entry.value)") })
+    let aliases = if (($devenv | get commands?) != null) {
+      ($devenv.commands
+        | transpose key value
+        | each {|entry| ($"alias ($entry.key) = ($entry.value)") })
+    } else { [] }
 
     # Build functions from the `functions` field if present
     let functions = if (($devenv | get functions?) != null) {
@@ -35,7 +37,7 @@ def open-project [project: string] {
           ($"def ($entry.key) [($param_names)] { ($cmd) }")
         })
     } else {
-      ""
+      []
     }
 
     print ($aliases | wrap "Aliases")
