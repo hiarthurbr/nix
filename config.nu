@@ -11,7 +11,7 @@ def cleanup [] {
   sudo nix-collect-garbage -d
 }
 
-def update [] {
+def nix-update [] {
   cd /home/hiarthurbr/nix;
   git pull;
   nix flake update --commit-lock-file;
