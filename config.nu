@@ -15,10 +15,10 @@ def nix-update [] {
   cd /home/hiarthurbr/nix;
   git pull;
   nix flake update --commit-lock-file;
+  sudo nixos-rebuild switch --show-trace --flake . --refresh;
   git add .
   commit-all (["chore: flake update ", (date now | format date "%Y-%m-%d %H:%M:%S")] | str join);
-  push;
-  sudo nixos-rebuild switch --show-trace --flake . --refresh;
+  git push -u (git remote show) ((git branch --no-color | lines | where (str starts-with '*')).0 | str trim -c '*' | str trim);
 }
 
 # Define a function to open a project in a nix-shell environment.
