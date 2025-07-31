@@ -11,6 +11,16 @@ def cleanup [] {
   sudo nix-collect-garbage -d
 }
 
+def update [] {
+  cd /home/hiarthurbr/nix;
+  git pull;
+  nix flake update --commit-lock-file;
+  git add .
+  commit-all (["chore: flake update ", (date now | format date "%Y-%m-%d %H:%M:%S")] | str join);
+  push;
+  sudo nixos-rebuild switch --flake .;
+}
+
 # Define a function to open a project in a nix-shell environment.
 def open-project [project: string] {
   let project_path = $"~/Developer/($project)"
