@@ -39,5 +39,5 @@
       libvdpau-va-gl
       amdvlk
     ];
-  }
+  };
 }
