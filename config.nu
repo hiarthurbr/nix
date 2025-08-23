@@ -91,7 +91,7 @@ def update-interactive [] {
 
 def open-project [project: string] {
   let project_path = $"~/Developer/($project)";
-  let devenv_path = ($project_path | path join "devenv.json");
+  let devenv_path = ($project_path | path join "devenv.nix");
 
   if ($devenv_path | path exists) {
     cd $project_path;
