@@ -35,6 +35,29 @@ def update-interactive [] {
   nix-update;
 }
 
+def rematch [user: string] {
+    http post --content-type application/json 'https://api.rematchtracker.com/scrap/profile' {
+        platform: 'xbox',
+        platformId: (
+            http post --content-type application/json 'https://api.rematchtracker.com/scrap/resolve' {
+                platform: 'xbox'
+                identifier: $user
+            }
+            | select platform_id | values | first
+        )
+    }
+    | get 'leaderboard_positions'
+    | rotate | rotate | reverse | reject column5 | values
+    | each {|table|
+        (if ($table | first | str ends-with 'percentile')
+            { $table | each {|key| $"($key * 100 | to text | str substring ..4)%" } }
+            else { $table }
+        )
+        | skip 1 | wrap ($table | first)
+    }
+    | reduce {|key, table| $table | merge $key }
+}
+
 # Define a function to open a project in a nix-shell environment.
 # def open-project [project: string] {
 #   let project_path = $"~/Developer/($project)"
