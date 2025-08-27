@@ -22,7 +22,7 @@
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs unstable; };
 
         modules = [
           ./configuration.nix
@@ -38,7 +38,6 @@
               home.homeDirectory = "/home/hiarthurbr";
               programs.home-manager.enable = true;
 
-              inherit inputs;
               imports = [
                 ./hiarthurbr.nix
               ];
