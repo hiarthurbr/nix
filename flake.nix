@@ -38,6 +38,7 @@
               home.homeDirectory = "/home/hiarthurbr";
               programs.home-manager.enable = true;
 
+              specialArgs = { inherit inputs; };
               imports = [
                 ./hiarthurbr.nix
               ];
