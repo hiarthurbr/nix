@@ -33,7 +33,7 @@
             home-manager.backupFileExtension = "home";
             home-manager.extraSpecialArgs = { inherit inputs; system = "x86_64-linux"; };
 
-            home-manager.users.hiarthurbr = { pkgs, ... }: {
+            home-manager.users.hiarthurbr = { pkgs, unstable, ... }: {
               home.username = "hiarthurbr";
               home.homeDirectory = "/home/hiarthurbr";
               programs.home-manager.enable = true;
