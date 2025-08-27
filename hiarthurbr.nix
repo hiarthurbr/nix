@@ -6,7 +6,7 @@
     inputs.zen-browser.packages."${system}".twilight
     fish protonmail-bridge protonmail-bridge-gui
     proton-pass starship nushell # input-leap
-    discord discordo commit-mono zed-editor devenv
+    discord discordo commit-mono unstable.zed-editor devenv
     eza zoxide xh zellij gitui dust dua yazi hyperfine evil-helix
     cargo-info rusty-man tokei just kondo htop btop mprocs prismlauncher chatterino7
   ];
