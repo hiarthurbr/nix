@@ -16,7 +16,7 @@
     nixpkgs,
     home-manager,
     zen-browser,
-    unstable
+    unstable,
     ...
   }: {
     nixosConfigurations = {
