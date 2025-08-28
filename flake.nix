@@ -34,6 +34,7 @@
       config.allowFree = true;
       
       overlays = [ unstable-overlay ];
+    };
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
