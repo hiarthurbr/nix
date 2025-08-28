@@ -13,7 +13,6 @@
 
   outputs = inputs@{
     self,
-    nixpkgs,
     home-manager,
     zen-browser,
     ...
@@ -22,14 +21,16 @@
     system = "x86_64-linux";
     username = "hiarthurbr";
 
-    nixpkgs.overlays = [
-      (final: _: {
-        unstable = import inputs.nixpkgs-unstable {
-          inherit system;
-          inherit (final) config;
-        };
-      })
-    ];
+    nixpkgs = import inputs.nixpkgs {
+      overlays = [
+        (final: _: {
+          unstable = import inputs.nixpkgs-unstable {
+            inherit system;
+            inherit (final) config;
+          };
+        })
+      ];
+    };
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
