@@ -27,7 +27,6 @@
         unstable = import inputs.nixpkgs-unstable {
           inherit system;
           inherit (final) config;
-          config.allowFree = true;
         };
       });
     ];
