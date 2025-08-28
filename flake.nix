@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = { 
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,18 +16,26 @@
     nixpkgs,
     home-manager,
     zen-browser,
-    unstable,
     ...
   }:
   let
     system = "x86_64-linux";
     username = "hiarthurbr";
-    pkgs-unstable = inputs.unstable.legacyPackages.${system};
+    pkgs = import inputs nixpkgs {
+      inherit system;
+      config.allowFree = true;
+      
+      overlays = [
+        import inputs.nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        }
+      ];
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs pkgs; };
 
         modules = [
           ./configuration.nix
@@ -36,7 +44,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "${username}-home";
-            home-manager.extraSpecialArgs = { inherit inputs system pkgs-unstable; };
+            home-manager.extraSpecialArgs = { inherit inputs system pkgs; };
 
             home-manager.users.${username} = { pkgs, ... }: {
               home = {
