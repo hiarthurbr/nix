@@ -21,18 +21,19 @@
   let
     system = "x86_64-linux";
     username = "hiarthurbr";
+
+    unstable-overlay = final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        inherit system;
+        config.allowFree = true;
+      };
+    };
+
     pkgs = import inputs nixpkgs {
       inherit system;
       config.allowFree = true;
       
-      overlays = [
-        final: prev: {
-          unstable = import inputs.nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-          }
-        }
-      ];
+      overlays = [ unstable-overlay ];
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
