@@ -16,13 +16,16 @@
     nixpkgs,
     home-manager,
     zen-browser,
-    unstable,
     ...
-  }: {
+  }:
+  let
+    system = "x86_64-linux";
+    pkgs-unstable = inputs.unstable.legacyPackages.${system};
+  in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs unstable; };
+        inherit system;
+        specialArgs = { inherit inputs pkgs-unstable; };
 
         modules = [
           ./configuration.nix
@@ -31,9 +34,9 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "home";
-            home-manager.extraSpecialArgs = { inherit inputs; system = "x86_64-linux"; };
+            home-manager.extraSpecialArgs = { inherit inputs system; };
 
-            home-manager.users.hiarthurbr = { pkgs, unstable, ... }: {
+            home-manager.users.hiarthurbr = { pkgs, ... }: {
               home.username = "hiarthurbr";
               home.homeDirectory = "/home/hiarthurbr";
               programs.home-manager.enable = true;
