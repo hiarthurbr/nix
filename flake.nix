@@ -22,6 +22,7 @@
     username = "hiarthurbr";
 
     nixpkgs = import inputs.nixpkgs {
+      inherit system;
       overlays = [
         (final: _: {
           unstable = import inputs.nixpkgs-unstable {
