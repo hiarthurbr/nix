@@ -29,7 +29,7 @@
       };
     };
 
-    pkgs = import inputs nixpkgs {
+    nixpkgs.pkgs = import inputs nixpkgs {
       inherit system;
       config.allowFree = true;
       
@@ -39,7 +39,7 @@
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs pkgs; };
+        specialArgs = { inherit inputs; };
 
         modules = [
           ./configuration.nix
@@ -48,7 +48,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "${username}-home";
-            home-manager.extraSpecialArgs = { inherit inputs system pkgs; };
+            home-manager.extraSpecialArgs = { inherit inputs system; };
 
             home-manager.users.${username} = { pkgs, ... }: {
               home = {
