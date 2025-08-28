@@ -28,7 +28,7 @@
           inherit system;
           inherit (final) config;
         };
-      });
+      })
     ];
   in {
     nixosConfigurations = {
