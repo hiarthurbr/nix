@@ -21,7 +21,10 @@
   let
     system = "x86_64-linux";
     username = "hiarthurbr";
-    unstable = inputs.nixpkgs-unstable;
+    unstable = import inputs.nixpkgs-unstable {
+      inherit system;
+      config.allowFree = true;
+    };
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
