@@ -32,7 +32,9 @@
     #     })
     #   ];
     # };
-    nixpkgs = import inputs.nixpkgs {};
+    nixpkgs = import inputs.nixpkgs {
+      inherit system;
+    };
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
