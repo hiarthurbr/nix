@@ -23,7 +23,9 @@
     username = "hiarthurbr";
     unstable = import inputs.nixpkgs-unstable {
       inherit system;
-      config.allowFree = true;
+      config = {
+        allowFree = true;
+      };
     };
   in {
     nixosConfigurations = {
