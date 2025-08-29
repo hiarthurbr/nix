@@ -32,7 +32,7 @@
     #     })
     #   ];
     # };
-    nixpkgs = import inputs.nixpkgs;
+    nixpkgs = import inputs.nixpkgs {};
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
