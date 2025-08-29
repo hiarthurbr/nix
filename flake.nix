@@ -20,26 +20,12 @@
   let
     system = "x86_64-linux";
     username = "hiarthurbr";
-
-    # nixpkgs = import inputs.nixpkgs {
-    #   inherit system;
-    #   overlays = [
-    #     (final: _: {
-    #       unstable = import inputs.nixpkgs-unstable {
-    #         inherit system;
-    #         inherit (final) config;
-    #       };
-    #     })
-    #   ];
-    # };
-    nixpkgs = import inputs.nixpkgs {
-      inherit system;
-    };
+    unstable = inputs.nixpkgs-unstable;
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs unstable; };
 
         modules = [
           ./configuration.nix
