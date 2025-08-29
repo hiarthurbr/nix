@@ -15,6 +15,7 @@
     self,
     home-manager,
     zen-browser,
+    nixpkgs,
     ...
   }:
   let
