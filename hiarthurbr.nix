@@ -2,13 +2,26 @@
 
 {
   home.packages = with pkgs; [
-    kitty ghostty jetbrains.rust-rover
-    inputs.zen-browser.packages."${system}".twilight
-    fish protonmail-bridge protonmail-bridge-gui
-    proton-pass starship nushell # input-leap
-    discord discordo commit-mono unstable.zed-editor devenv git-cliff jujutsu
-    eza zoxide xh zellij gitui dust dua yazi hyperfine evil-helix
-    cargo-info rusty-man tokei just kondo htop btop mprocs prismlauncher chatterino7
+    kitty ghostty warp-terminal # Terminals
+    
+    jetbrains.rust-rover unstable.zed-editor evil-helix # IDEs
+    
+    inputs.zen-browser.packages."${system}".twilight # Browsers
+
+    fish nushell # Shells
+    eza zoxide xh zellij dust dua yazi starship # Shell stuff
+    
+    git-cliff jujutsu gitui # Git stuff
+
+    hyperfine cargo-info rusty-man tokei just kondo devenv # Dev stuff
+
+    htop btop mprocs # General CLI/TUI stuff
+
+    protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7 # Apps
+
+    discordo # CLI/TUI Apps
+
+    commit-mono # Fonts
   ];
 
   programs.nushell = {
