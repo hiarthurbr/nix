@@ -13,6 +13,10 @@ def cleanup [] {
 
 def nix-update [] {
   cd /home/hiarthurbr/nix;
+
+  print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating flakes"] | str join);
+  nix flake update --commit-lock-file;
+ 
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating git"] | str join);
   try {
     git add .
@@ -21,10 +25,10 @@ def nix-update [] {
   } catch {
     |_| print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Nothing to push!"] | str join);
   }
-  print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating flakes"] | str join);
-  nix flake update --commit-lock-file;
+
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Rebuilding nix"] | str join);
   sudo nixos-rebuild switch --show-trace --flake . --refresh;
+
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Done!"] | str join);
   cd -;
 }

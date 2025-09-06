@@ -9,6 +9,7 @@
     inputs.zen-browser.packages."${system}".twilight # Browsers
 
     fish nushell # Shells
+
     eza zoxide xh zellij dust dua yazi starship # Shell stuff
     
     git-cliff jujutsu gitui # Git stuff
