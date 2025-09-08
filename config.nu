@@ -20,11 +20,18 @@ def nix-update [] {
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating git"] | str join);
   try {
     git add .
+  } catch {}
+
+  try {
     commit-all (["chore: flake update ", (date now | format date "%Y-%m-%d %H:%M:%S")] | str join);
+  } catch {}
+
+  try {
     git push -u (git remote show) ((git branch --no-color | lines | where (str starts-with '*')).0 | str trim -c '*' | str trim);
   } catch {
     |_| print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Nothing to push!"] | str join);
   }
+
 
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Rebuilding nix"] | str join);
   sudo nixos-rebuild switch --show-trace --flake . --refresh;
