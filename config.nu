@@ -23,7 +23,7 @@ def nix-update [] {
   } catch {}
 
   try {
-    commit-all (["chore: flake update ", (date now | format date "%Y-%m-%d %H:%M:%S")] | str join);
+    commit-all (["chore: Flake update ", (date now | format date "%Y-%m-%d %H:%M:%S")] | str join);
   } catch {}
 
   try {
@@ -43,6 +43,16 @@ def nix-update [] {
 def update-interactive [] {
   cd /home/hiarthurbr/nix;
   hx;
+
+  print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating git"] | str join);
+  try {
+    git add .
+  } catch {}
+
+  try {
+    commit-all (["chore: Config update ", (date now | format date "%Y-%m-%d %H:%M:%S")] | str join);
+  } catch {}
+
   nix-update;
 }
 
