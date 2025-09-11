@@ -18,7 +18,7 @@
 
     htop btop mprocs # General CLI/TUI stuff
 
-    protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7 # Apps
+    protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7 input-leap # Apps
 
     discordo # CLI/TUI Apps
 
