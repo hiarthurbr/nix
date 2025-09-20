@@ -20,7 +20,7 @@
 
     protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7 input-leap # Apps
 
-    discordo # CLI/TUI Apps
+    discordo spotify-player # CLI/TUI Apps
 
     commit-mono # Fonts
   ];
