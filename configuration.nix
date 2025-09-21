@@ -118,7 +118,7 @@
         "context.modules" = [
           {
             name = "libpipewire-module-vban-send";
-            args = {
+            args = ''{
               #local.ifname = "eth0";
               #source.ip = "0.0.0.0";
               destination.ip = "10.0.0.2";
@@ -137,7 +137,7 @@
               stream.props = {
                 node.name = "nixos";
               };
-            };
+            }'';
           }
         ];
       };
