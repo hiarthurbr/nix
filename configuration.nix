@@ -88,7 +88,7 @@
   services.xserver.xkb = {
     layout = "en";
     variant = "intl";
-  }
+  };
 
   # Configure console keymap
   console.keyMap = "br-abnt2";
