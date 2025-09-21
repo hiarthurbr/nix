@@ -68,7 +68,7 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   services.interception-tools = {
-    enable = true;
+    enable = false;
     plugins = [ pkgs.interception-tools-plugins.caps2esc ];
     udevmonConfig = ''
       - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
@@ -78,11 +78,17 @@
     '';
   };
 
-  # Configure keymap in X11
+  # Notebook keymap 
+  # services.xserver.xkb = {
+  #   layout = "br";
+  #   variant = "thinkpad";
+  # };
+  
+  # Ajazz keymap
   services.xserver.xkb = {
-    layout = "br";
-    variant = "thinkpad";
-  };
+    layout = "en";
+    variant = "intl";
+  }
 
   # Configure console keymap
   console.keyMap = "br-abnt2";
@@ -92,7 +98,7 @@
 
   # Enable sound with pipewire.
   services.pulseaudio = {
-    enabled = true;
+    enable = true;
     package = pkgs.pulseaudioFull;
     extraConfig = "load-module module-equalizer-sink\nload-module module-dbus-protocol";
   };
