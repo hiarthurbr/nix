@@ -114,33 +114,33 @@
     #media-session.enable = true;
 
     extraConfig.pipewire = {
-      vban = {
-        "context.modules" = [
+      vban = ''
+        context.modules = [
           {
-            name = "libpipewire-module-vban-send";
-            args = ''{
-              #local.ifname = "eth0";
-              #source.ip = "0.0.0.0";
-              destination.ip = "10.0.0.2";
-              destination.port = 6980;
-              #net.mtu = 1500;
-              #net.ttl = 1;
-              #net.loop = false;
-              #sess.min-ptime = 2;
-              #sess.max-ptime = 20;
-              #sess.name = "PipeWire VBAN stream";
-              #sess.media = "audio";
-              #audio.format = "S16LE";
-              #audio.rate = 44100;
-              #audio.channels = 2;
-              #audio.position = [ FL FR ];
+            name = libpipewire-module-vban-send
+            args = {
+              #local.ifname = "eth0"
+              #source.ip = "0.0.0.0"
+              destination.ip = "10.0.0.2"
+              destination.port = 6980
+              #net.mtu = 1500
+              #net.ttl = 1
+              #net.loop = false
+              #sess.min-ptime = 2
+              #sess.max-ptime = 20
+              #sess.name = "PipeWire VBAN stream"
+              #sess.media = "audio"
+              #audio.format = "S16LE"
+              #audio.rate = 44100
+              #audio.channels = 2
+              #audio.position = [ FL FR ]
               stream.props = {
-                node.name = "nixos";
-              };
-            }'';
+                node.name = "nixos"
+              }
+            }
           }
-        ];
-      };
+        ]
+      '';
     };
   };
 
