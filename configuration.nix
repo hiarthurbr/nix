@@ -96,12 +96,10 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
   # Enable sound with pipewire.
-  services.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-    extraConfig = "load-module module-equalizer-sink\nload-module module-dbus-protocol";
-  };
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -109,7 +107,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -172,10 +170,26 @@
     '';
   };
 
+  nixpkgs.overlays = [
+    # GNOME 46: triple-buffering-v4-46
+    (final: prev: {
+      mutter = prev.mutter.overrideAttrs (old: {
+        src = pkgs.fetchFromGitLab  {
+          domain = "gitlab.gnome.org";
+          owner = "vanvugt";
+          repo = "mutter";
+          rev = "triple-buffering-v4-46";
+          hash = "sha256-C2VfW3ThPEZ37YkX7ejlyumLnWa9oij333d5c4yfZxc=";
+        };
+      });
+    })
+  ];
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; import ./global-packages.nix { inherit pkgs; };
+  environment.systemPackages = with pkgs; [ gnomeExtensions.appindicator ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
