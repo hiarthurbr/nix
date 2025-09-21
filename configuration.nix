@@ -91,7 +91,11 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  services.pulseaudio = {
+    enabled = true;
+    package = pkgs.pulseaudioFull;
+    extraConfig = "load-module module-equalizer-sink\nload-module module-dbus-protocol";
+  };
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
