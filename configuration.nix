@@ -184,7 +184,7 @@
       });
     })
   ];
-
+  nixpkgs.config.allowAliases = false;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
