@@ -112,6 +112,14 @@
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+
+    extraConfig.pipewire = {
+      vban = {
+        "context.modules" = {
+          name = "libpipewire-module-vban-send";
+        };
+      };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
