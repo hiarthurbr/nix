@@ -86,7 +86,7 @@
   
   # Ajazz keymap
   services.xserver.xkb = {
-    layout = "en";
+    layout = "us";
     variant = "intl";
   };
 
