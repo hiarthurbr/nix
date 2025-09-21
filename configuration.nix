@@ -115,9 +115,11 @@
 
     extraConfig.pipewire = {
       vban = {
-        "context.modules" = {
-          name = "libpipewire-module-vban-send";
-        };
+        "context.modules" = [
+          {
+            name = "libpipewire-module-vban-send";
+          }
+        ];
       };
     };
   };
