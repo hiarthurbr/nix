@@ -20,7 +20,7 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "hiarthurbr-nixos"; # Define your hostname.
+  networking.hostName = "${username}-nixos"; # Define your hostname.
   networking.firewall.allowedTCPPortRanges = [
     {
       from = 1024;
@@ -153,7 +153,7 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.hiarthurbr = {
+  users.users.${username} = {
     isNormalUser = true;
     shell = pkgs.nushell;
     description = "Arthur Bufalo Rodrigues";
@@ -190,7 +190,7 @@
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "hiarthurbr" ];
+      trusted-users = [ "root" "${username}" ];
     };
     extraOptions = ''
       extra-substituters = https://devenv.cachix.org
