@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, username, ... }:
+{ config, pkgs, username, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.sops-nix.nixosModules.sops
     ];
 
   swapDevices = [{
@@ -160,6 +161,11 @@
     extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [];
   };
+
+  sops.defaultSopsFile = ./secrets/${username}.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt"
 
   services.openssh = {
     enable = true;
