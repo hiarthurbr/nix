@@ -35,8 +35,8 @@
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
-        inherit system username;
-        specialArgs = { inherit inputs unstable; };
+        inherit system;
+        specialArgs = { inherit inputs unstable username; };
 
         modules = [
           ./configuration.nix
