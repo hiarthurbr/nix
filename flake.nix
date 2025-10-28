@@ -39,12 +39,7 @@
         specialArgs = { inherit inputs unstable; };
 
         modules = [
-          (import ./configuration.nix {
-            inherit (nixpkgs) lib;
-            inherit (self) config;
-            inherit (pkgs) inputs;
-            inherit username nixpkgs home-manager;
-          })
+          (with username; ./configuration.nix)
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
