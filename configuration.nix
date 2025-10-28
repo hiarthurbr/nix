@@ -166,6 +166,7 @@
   sops.defaultSopsFormat = "yaml";
 
   sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+  sops.secrets.ssh-key = {};
 
   services.openssh = {
     enable = true;
