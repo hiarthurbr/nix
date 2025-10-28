@@ -48,7 +48,7 @@
     settings = {
       user = {
         email = "hi@arthurbr.me";
-        name = "hiarthurbr"
+        name = "hiarthurbr";
       };
       init.defaultBranch = "master";
       gpg.format = "ssh";
