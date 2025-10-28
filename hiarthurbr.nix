@@ -45,9 +45,11 @@
 
   programs.git = {
     enable = true;
-    userName = "hiarthurbr";
-    userEmail = "hi@arthurbr.me";
-    extraConfig = {
+    settings = {
+      user = {
+        email = "hi@arthurbr.me";
+        name = "hiarthurbr"
+      };
       init.defaultBranch = "master";
       gpg.format = "ssh";
       user.signingkey = "/home/hiarthurbr/.ssh/id_ed25519.pub";
