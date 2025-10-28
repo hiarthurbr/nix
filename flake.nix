@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{
@@ -16,6 +20,7 @@
     home-manager,
     zen-browser,
     nixpkgs,
+    sops-nix,
     ...
   }:
   let
@@ -35,6 +40,7 @@
 
         modules = [
           ./configuration.nix
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -56,6 +62,11 @@
             };
           }
         ];
+
+        sops.defaultSopsFile = ./secrets/${username}.yaml;
+        sops.defaultSopsFormat = "yaml";
+        
+        sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt"
       };
     };
   };
