@@ -42,7 +42,7 @@
           (import ./configuration.nix {
             inherit (nixpkgs) lib;
             inherit (self) config;
-            inherit inputs username;
+            inherit inputs username nixpkgs home-manager;
           })
           home-manager.nixosModules.home-manager
           {
