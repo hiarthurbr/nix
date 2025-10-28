@@ -35,11 +35,11 @@
   in {
     nixosConfigurations = {
       hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
+        inherit system username;
         specialArgs = { inherit inputs unstable; };
 
         modules = [
-          (with username; ./configuration.nix)
+          ./configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
