@@ -41,8 +41,8 @@
         modules = [
           (import ./configuration.nix {
             inherit (nixpkgs) lib;
-            inherit (unstable) nixpkgs-unstable;
-            inherit inputs nixpkgs username home-manager;
+            inherit (self) config;
+            inherit inputs username;
           })
           home-manager.nixosModules.home-manager
           {
