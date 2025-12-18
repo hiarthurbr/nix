@@ -175,7 +175,6 @@
     description = "Arthur Bufalo Rodrigues";
     extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [];
-    openssh.authorizedKeys.keyFiles = [ config.sops.secrets.""];
   };
 
   services.openssh = {
