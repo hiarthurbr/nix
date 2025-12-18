@@ -27,13 +27,19 @@
     htop btop mprocs discordo spotify-player
 
     # Apps
-    protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7 input-leap pavucontrol easyeffects spotify
+    protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7
+    input-leap pavucontrol easyeffects spotify
 
     # Fonts
     commit-mono
 
     # Gnome extensions
-    gnomeExtensions.blur-my-shell gnomeExtensions.just-perfection gnomeExtensions.arc-menu gnomeExtensions.appindicator
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.just-perfection
+    gnomeExtensions.arc-menu
+    gnomeExtensions.appindicator
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.applications-menu
   ];
 
   programs.nushell = {
