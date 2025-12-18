@@ -153,7 +153,7 @@
     ];
   };
 
-  sops.defaultSopsFile = ./secrets/credentials.yaml;
+  sops.defaultSopsFile = ./secrets/hiarthurbr.yaml;
   sops.defaultSopsFormat = "yaml";
 
   sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
