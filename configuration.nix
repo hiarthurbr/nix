@@ -162,10 +162,10 @@
   sops.secrets."${username}/pwd".neededForUsers = true;
 
   sops.secrets.root-pwd.neededForUsers = true;
-  sops.secrets.host-pub-rsa-key = {};
-  sops.secrets.host-private-rsa-key = {};
-  sops.secrets.host-pub-ed25519-key = {};
-  sops.secrets.host-private-ed25519-key = {};
+  sops.secrets.host-rsa-pub-key = {};
+  sops.secrets.host-rsa-private-key = {};
+  sops.secrets.host-ed25519-pub-key = {};
+  sops.secrets.host-ed25519-private-key = {};
   
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
