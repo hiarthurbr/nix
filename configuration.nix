@@ -188,11 +188,11 @@
     hostKeys = [
       {
         bits = 4096;
-        path = config.sops.host-private-rsa-key.path;
+        path = config.sops.host-rsa-private-key.path;
         type = "rsa";
       }
       {
-        path = config.sops.host-private-ed25519-key.path;
+        path = config.sops.host-ed25519-private-key.path;
         type = "ed25519";
       }
     ];
