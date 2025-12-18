@@ -153,20 +153,30 @@
     ];
   };
 
+  sops.defaultSopsFile = ./secrets/credentials.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+  sops.secrets."${username}/ssh-private-key".owner = username;
+  sops.secrets."${username}/ssh-pub-key".owner = username;
+  sops.secrets."${username}/pwd".neededForUsers = true;
+
+  sops.secrets.root-pwd.neededForUsers = true;
+  sops.secrets.host-pub-rsa-key = {};
+  sops.secrets.host-private-rsa-key = {};
+  sops.secrets.host-pub-ed25519-key = {};
+  sops.secrets.host-private-ed25519-key = {};
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
     shell = pkgs.nushell;
+    hashedPasswordFile = config.sops.secrets."${username}/pwd".path;
     description = "Arthur Bufalo Rodrigues";
     extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [];
+    openssh.authorizedKeys.keyFiles = [ config.sops.secrets.""];
   };
-
-  sops.defaultSopsFile = ./secrets/${username}.yaml;
-  sops.defaultSopsFormat = "yaml";
-
-  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
-  sops.secrets.ssh-key = {};
 
   services.openssh = {
     enable = true;
@@ -176,6 +186,17 @@
       # passwordAuthentication = false;
       # permitRootLogin = "no";
     };
+    hostKeys = [
+      {
+        bits = 4096;
+        path = config.sops.host-private-rsa-key.path;
+        type = "rsa";
+      }
+      {
+        path = config.sops.host-private-ed25519-key.path;
+        type = "ed25519";
+      }
+    ];
   };
 
   security.sudo.enable = false;

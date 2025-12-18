@@ -13,6 +13,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nix.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{
@@ -21,6 +25,7 @@
     zen-browser,
     nixpkgs,
     sops-nix,
+    nur,
     ...
   }:
   let
@@ -40,6 +45,8 @@
 
         modules = [
           ./configuration.nix
+          nur.modules.nixos.default
+          nur.legacyPackages."${system}".repos.iopq.modules.xraya
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

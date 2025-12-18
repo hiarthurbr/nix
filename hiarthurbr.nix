@@ -2,27 +2,38 @@
 
 {
   home.packages = with pkgs; [
-    kitty ghostty warp-terminal # Terminals
-    
-    jetbrains.rust-rover unstable.zed-editor evil-helix # IDEs
-    
-    inputs.zen-browser.packages."${system}".twilight # Browsers
+    # Terminals
+    kitty ghostty warp-terminal
 
-    fish nushell # Shells
+    # IDEs
+    jetbrains.rust-rover unstable.zed-editor evil-helix
 
-    eza zoxide xh zellij dust dua yazi starship # Shell stuff
-    
-    git-cliff jujutsu gitui # Git stuff
+    # Browsers
+    inputs.zen-browser.packages."${system}".twilight nur.repos.Ev357.helium
 
-    hyperfine cargo-info rusty-man tokei just kondo devenv # Dev stuff
+    # Shells
+    fish nushell
 
-    htop btop mprocs # General CLI/TUI stuff
+    # Shell stuff
+    eza zoxide xh zellij dust dua yazi starship hyfetch
 
-    protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7 input-leap pavucontrol easyeffects spotify # Apps
+    # Git stuff
+    git-cliff jujutsu gitui
 
-    discordo spotify-player # CLI/TUI Apps
+    # Dev stuff
+    hyperfine cargo-info rusty-man tokei just kondo devenv
 
-    commit-mono # Fonts
+    # General CLI/TUI stuff
+    htop btop mprocs discordo spotify-player
+
+    # Apps
+    protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7 input-leap pavucontrol easyeffects spotify
+
+    # Fonts
+    commit-mono
+
+    # Gnome extensions
+    gnomeExtensions.blur-my-shell gnomeExtensions.just-perfection gnomeExtensions.arc-menu gnomeExtensions.appindicator
   ];
 
   programs.nushell = {
