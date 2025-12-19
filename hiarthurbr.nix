@@ -156,21 +156,21 @@
 
       "org/gnome/shell/extensions/dash-to-dock" = {
         apply-custom-theme = false;
-        background-color = 'rgb(0,0,0)';
+        background-color = "rgb(0,0,0)";
         background-opacity = 0.37;
         custom-background-color = true;
         custom-theme-shrink = false;
         customize-alphas = true;
         dash-max-icon-size = 48;
-        dock-position = 'BOTTOM';
+        dock-position = "BOTTOM";
         height-fraction = 0.90000000000000002;
-        intellihide-mode = 'FOCUS_APPLICATION_WINDOWS';
+        intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
         max-alpha = 0.40000000000000002;
         min-alpha = 0.29999999999999999;
         preferred-monitor = -2;
-        preferred-monitor-by-connector = 'HDMI-1';
+        preferred-monitor-by-connector = "HDMI-1";
         require-pressure-to-show = false;
-        transparency-mode = 'DYNAMIC';
+        transparency-mode = "DYNAMIC";
       };
     };
   };
