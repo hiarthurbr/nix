@@ -99,13 +99,11 @@
 
       "org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
-      "org/gnome/shell/extensions/blur-my-shell" = {
-        hacks-level = 1;
-
-        appfolder = {
-          brightness = 0.6;
-          sigma = 30;
-        };
+      "org/gnome/shell/extensions/blur-my-shell".hacks-level = 1;
+      "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
+        brightness = 0.6;
+        sigma = 30;
+      };
 
         applications = {
           blur = true;
