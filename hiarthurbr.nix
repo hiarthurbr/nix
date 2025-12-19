@@ -170,6 +170,5 @@
         require-pressure-to-show = false;
         transparency-mode = "DYNAMIC";
       };
-    };
   };
 }
