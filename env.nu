@@ -3,3 +3,5 @@ mkdir $starship_config
 starship init nu | save -f ($nu.data-dir | path join ($starship_config | path join "starship.nu"))
 
 zoxide init --cmd cd nushell | save -f ~/.zoxide.nu
+
+hyfetch -p random --args="-c examples/10.jsonc"
