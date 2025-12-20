@@ -40,6 +40,9 @@
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
     gnomeExtensions.applications-menu
+    gnomeExtensions.top-bar-organizer
+    gnomeExtensions.astra-monitor
+    gnomeExtensions.search-light
   ];
 
   programs.nushell = {
@@ -72,6 +75,8 @@
       user.signingkey = "/home/hiarthurbr/.ssh/id_ed25519.pub";
     };
   };
+
+  gtk.cursorTheme = pkgs.posy-cursors;
 
   dconf = {
     enable = true;
