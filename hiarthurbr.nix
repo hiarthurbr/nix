@@ -42,7 +42,6 @@
     gnomeExtensions.applications-menu
     gnomeExtensions.top-bar-organizer
     gnomeExtensions.astra-monitor
-    gnomeExtensions.search-light
   ];
 
   programs.nushell = {
@@ -92,6 +91,8 @@
           appindicator.extensionUuid
           dash-to-dock.extensionUuid
           applications-menu.extensionUuid
+          top-bar-organizer.extensionUuid
+          astra-monitor.extensionUuid
         ];
         favorite-apps = [
           "helium.desktop"
