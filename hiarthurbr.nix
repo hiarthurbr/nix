@@ -76,7 +76,7 @@
     };
   };
 
-  gtk.cursorTheme = pkgs.posy-cursors;
+  gtk.cursorTheme.package = pkgs.posy-cursors;
 
   dconf = {
     enable = true;
