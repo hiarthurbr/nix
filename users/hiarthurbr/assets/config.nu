@@ -16,7 +16,7 @@ def nix-update [] {
 
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating flakes"] | str join);
   nix flake update --commit-lock-file;
- 
+
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating git"] | str join);
   try {
     git add .
@@ -42,7 +42,8 @@ def nix-update [] {
 
 def update-interactive [] {
   cd /home/hiarthurbr/nix;
-  hx;
+  # hx;
+  zed-editor --wait .
 
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating git"] | str join);
   try {
