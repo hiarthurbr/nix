@@ -1,80 +1,6 @@
-{ config, pkgs, unstable, system, inputs, ... }:
+{ pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    # Terminals
-    kitty ghostty warp-terminal
-
-    # IDEs
-    jetbrains.rust-rover unstable.zed-editor evil-helix
-
-    # Browsers
-    inputs.zen-browser.packages."${system}".twilight nur.repos.Ev357.helium
-
-    # Shells
-    fish nushell
-
-    # Shell stuff
-    eza zoxide xh zellij dust dua yazi starship hyfetch fastfetch
-
-    # Git stuff
-    git-cliff jujutsu gitui
-
-    # Dev stuff
-    hyperfine cargo-info rusty-man tokei just kondo devenv
-
-    # General CLI/TUI stuff
-    htop btop mprocs discordo spotify-player
-
-    # Apps
-    protonmail-bridge protonmail-bridge-gui proton-pass discord prismlauncher chatterino7
-    input-leap pavucontrol easyeffects spotify
-
-    # Fonts
-    commit-mono
-
-    # Gnome extensions
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.just-perfection
-    gnomeExtensions.arc-menu
-    gnomeExtensions.appindicator
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.applications-menu
-    gnomeExtensions.top-bar-organizer
-    gnomeExtensions.astra-monitor
-  ];
-
-  programs.nushell = {
-    enable = true;
-
-    shellAliases = {
-      zed = "zeditor";
-      rebuild = "sudo nixos-rebuild switch --show-trace --flake git+https://github.com/hiarthurbr/nix --refresh --no-write-lock-file";
-      # update = "nix-channel --update";
-      # upgrade = "nix-env --upgrade";
-      push = "git push -u (git remote show) ((git branch --no-color | lines | where (str starts-with '*')).0 | str trim -c '*' | str trim)";
-      op = "open-project";
-      ls = "${pkgs.eza}/bin/eza";
-      _ls = "${pkgs.uutils-coreutils-noprefix}/bin/ls";
-    };
-
-    configFile.source = ./config.nu;
-    envFile.source = ./env.nu;
-  };
-
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        email = "hi@arthurbr.me";
-        name = "hiarthurbr";
-      };
-      init.defaultBranch = "master";
-      gpg.format = "ssh";
-      user.signingkey = "/home/hiarthurbr/.ssh/id_ed25519.pub";
-    };
-  };
-
   gtk.cursorTheme.package = pkgs.posy-cursors;
 
   dconf = {
@@ -132,11 +58,14 @@
         unblur-in-overview = true;
       };
 
-      "org/gnome/shell/extensions/blur-my-shell/dash-to-panel".blur-original-panel = true;
+      "org/gnome/shell/extensions/blur-my-shell/dash-to-panel".blur-original-panel =
+        true;
 
-      "org/gnome/shell/extensions/blur-my-shell/hidetopbar".compatibility = false;
+      "org/gnome/shell/extensions/blur-my-shell/hidetopbar".compatibility =
+        false;
 
-      "org/gnome/shell/extensions/blur-my-shell/lockscreen".pipeline = "pipeline_default";
+      "org/gnome/shell/extensions/blur-my-shell/lockscreen".pipeline =
+        "pipeline_default";
 
       "org/gnome/shell/extensions/blur-my-shell/overview" = {
         pipeline = "pipeline_default";
@@ -150,7 +79,8 @@
         static-blur = true;
       };
 
-      "org/gnome/shell/extensions/blur-my-shell/screenshot".pipeline = "pipeline_default";
+      "org/gnome/shell/extensions/blur-my-shell/screenshot".pipeline =
+        "pipeline_default";
 
       "org/gnome/shell/extensions/blur-my-shell/window-list" = {
         brightness = 0.6;
@@ -166,10 +96,10 @@
         customize-alphas = true;
         dash-max-icon-size = 48;
         dock-position = "BOTTOM";
-        height-fraction = 0.90000000000000002;
+        height-fraction = 0.9;
         intellihide-mode = "FOCUS_APPLICATION_WINDOWS";
-        max-alpha = 0.40000000000000002;
-        min-alpha = 0.29999999999999999;
+        max-alpha = 0.4;
+        min-alpha = 0.3;
         preferred-monitor = -2;
         preferred-monitor-by-connector = "HDMI-1";
         require-pressure-to-show = false;

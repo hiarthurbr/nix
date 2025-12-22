@@ -2,14 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, username, inputs, ... }:
+{ config, pkgs, inputs, env, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.sops-nix.nixosModules.sops
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.sops-nix.nixosModules.sops
+  ];
 
   swapDevices = [{
     device = "/swapfile";
@@ -21,19 +20,15 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "${username}-nixos"; # Define your hostname.
-  networking.firewall.allowedTCPPortRanges = [
-    {
-      from = 1024;
-      to = 65535;
-    }
-  ];
-  networking.firewall.allowedUDPPortRanges = [
-    {
-      from = 1024;
-      to = 65535;
-    }
-  ];
+  networking.hostName = env.systemName; # Define your hostname.
+  networking.firewall.allowedTCPPortRanges = [{
+    from = 1024;
+    to = 65535;
+  }];
+  networking.firewall.allowedUDPPortRanges = [{
+    from = 1024;
+    to = 65535;
+  }];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -79,12 +74,12 @@
     '';
   };
 
-  # Notebook keymap 
+  # Notebook keymap
   # services.xserver.xkb = {
   #   layout = "br";
   #   variant = "thinkpad";
   # };
-  
+
   # Ajazz keymap
   services.xserver.xkb = {
     layout = "us";
@@ -148,34 +143,43 @@
 
   services.zerotierone = {
     enable = true;
-    joinNetworks = [
-      "9bee8941b58a36d3"
-    ];
+    joinNetworks = [ "9bee8941b58a36d3" ];
   };
 
   sops.defaultSopsFile = ./secrets/hiarthurbr.yaml;
   sops.defaultSopsFormat = "yaml";
 
-  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
-  sops.secrets."${username}/ssh-private-key".owner = username;
-  sops.secrets."${username}/ssh-pub-key".owner = username;
-  sops.secrets."${username}/pwd".neededForUsers = true;
+  sops.age.keyFile = "/home/hiarthurbr/.config/sops/age/keys.txt";
 
-  sops.secrets.root-pwd.neededForUsers = true;
-  sops.secrets.host-rsa-pub-key = {};
-  sops.secrets.host-rsa-private-key = {};
-  sops.secrets.host-ed25519-pub-key = {};
-  sops.secrets.host-ed25519-private-key = {};
-  
+  sops.secrets = pkgs.lib.attrsets.recursiveUpdate (builtins.listToAttrs
+    (pkgs.lib.lists.flatten (builtins.map (username: [
+      {
+        name = "${username}/ssh-private-key";
+        value = { owner = username; };
+      }
+      {
+        name = "${username}/ssh-pub-key";
+        value = { owner = username; };
+      }
+      {
+        name = "${username}/pwd";
+        value = { neededForUsers = true; };
+      }
+    ]) (builtins.attrNames (builtins.readDir ./users))))) {
+      root-pwd.neededForUsers = true;
+      host-rsa-pub-key = { };
+      host-rsa-private-key = { };
+      host-ed25519-pub-key = { };
+      host-ed25519-private-key = { };
+    };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${username} = {
-    isNormalUser = true;
-    shell = pkgs.nushell;
-    hashedPasswordFile = config.sops.secrets."${username}/pwd".path;
-    description = "Arthur Bufalo Rodrigues";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
-    packages = with pkgs; [];
-  };
+  users.users = (builtins.mapAttrs (username: type:
+    (pkgs.lib.attrsets.recursiveUpdate
+      (import ./users/${username}/system.nix { inherit pkgs; }) {
+        packages = [ ];
+        hashedPasswordFile = ''config.sops.secrets."${username}/pwd".path'';
+      })) (builtins.readDir ./users));
 
   services.openssh = {
     enable = true;
@@ -208,16 +212,14 @@
   programs.firefox.enable = false;
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    libusb1
-  ];
+  programs.nix-ld.libraries = with pkgs; [ libusb1 ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "${username}" ];
+      trusted-users = env.trusted-users;
     };
     extraOptions = ''
       extra-substituters = https://devenv.cachix.org
@@ -227,7 +229,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; import ./global-packages.nix { inherit pkgs; };
+  environment.systemPackages = import ./global-packages.nix { inherit pkgs; };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -254,6 +256,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = env.stateVersion; # Did you read the comment?
 
 }

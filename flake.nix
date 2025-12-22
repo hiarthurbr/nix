@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = { 
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -19,56 +19,72 @@
     };
   };
 
-  outputs = inputs@{
-    self,
-    home-manager,
-    zen-browser,
-    nixpkgs,
-    sops-nix,
-    nur,
-    ...
-  }:
-  let
-    system = "x86_64-linux";
-    username = "hiarthurbr";
-    unstable = import inputs.nixpkgs-unstable {
-      inherit system;
-      config = {
-        allowFree = true;
+  outputs = inputs@{ home-manager, nixpkgs, nur, ... }:
+    let
+      env = import ./env.nix;
+
+      unstable = import inputs.nixpkgs-unstable {
+        system = env.system;
+        config = { allowFree = true; };
       };
-    };
-  in {
-    nixosConfigurations = {
-      hiarthurbr-nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs unstable username; };
+    in {
+      nixosConfigurations."${env.systemName}" = nixpkgs.lib.nixosSystem {
+        system = env.system;
+        specialArgs = { inherit inputs unstable env; };
 
         modules = [
           ./configuration.nix
           nur.modules.nixos.default
-          nur.legacyPackages."${system}".repos.iopq.modules.xraya
+          nur.legacyPackages."${env.system}".repos.iopq.modules.xraya
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "${username}-home";
-            home-manager.extraSpecialArgs = { inherit inputs system unstable; };
+            home-manager.backupFileExtension = "home-mngr-backup";
+            home-manager.extraSpecialArgs = {
+              inherit inputs unstable env;
+              system = env.system;
+            };
 
-            home-manager.users.${username} = { pkgs, ... }: {
+            # home-manager.users.${username} = { ... }: {
+            #   home = {
+            #     inherit username;
+            #     homeDirectory = "/home/${username}";
+            #   };
+            #   programs.home-manager.enable = true;
+
+            #   imports = [ ./${username}.nix ];
+            #   home.stateVersion = "23.05";
+            # };
+
+            home-manager.users = builtins.mapAttrs (username: _: {
               home = {
                 inherit username;
+                stateVersion = env.stateVersion;
                 homeDirectory = "/home/${username}";
               };
               programs.home-manager.enable = true;
 
               imports = [
-                ./${username}.nix
+                # ./users/${username}/home.nix
+                # { pkgs, system, inputs, env, unstable, config, lib, specialArgs, options, modulesPath, _class, nixosConfig, osConfig, osClass }
+                (args@{ pkgs, lib, ... }:
+                  let mod = (args // { inherit pkgs; });
+                  in (import ./users/${username}/home.nix mod) // {
+                    home.packages = import ./users/${username}/packages.nix mod;
+                    programs = lib.attrsets.mapAttrs' (name: _:
+                      lib.attrsets.nameValuePair
+                      (builtins.substring 0 (builtins.stringLength name - 4)
+                        name) (import ./users/${username}/programs/${name} mod))
+                      (if builtins.pathExists ./users/${username}/programs then
+                        (builtins.readDir ./users/${username}/programs)
+                      else
+                        { });
+                  })
               ];
-              home.stateVersion = "23.05";
-            };
+            }) (builtins.readDir ./users);
           }
         ];
       };
     };
-  };
 }
