@@ -76,5 +76,5 @@ with pkgs; [
   gnomeExtensions.top-bar-organizer
   gnomeExtensions.astra-monitor
   gnomeExtensions.dash2dock-lite
-  gnomeExtensions.custom-custom-window-controls
+  gnomeExtensions.custom-window-controls
 ]
