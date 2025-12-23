@@ -42,8 +42,8 @@ def nix-update [] {
 
 def update-interactive [] {
   cd /home/hiarthurbr/nix;
-  # hx;
-  zed-editor --wait .
+  hx;
+  # zeditor --wait .
 
   print (["[", (date now | format date "%H:%M:%S"), " NIX UPDATE] ", "Updating git"] | str join);
   try {
