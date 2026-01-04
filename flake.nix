@@ -25,7 +25,7 @@
       home-manager,
       nixpkgs,
       nur,
-      # self,
+      self,
       ...
     }:
     let
@@ -41,13 +41,20 @@
     {
       nixosConfigurations."${env.systemName}" = nixpkgs.lib.nixosSystem {
         system = env.system;
-        specialArgs = { inherit inputs unstable env; };
+        specialArgs = {
+          inherit
+            inputs
+            unstable
+            env
+            self
+            ;
+        };
 
         modules = [
           (
             { pkgs, ... }:
             {
-              nixpkgs.overlays = [ inputs.nix-cachyos-kernel.inputs.overlays.pinned ];
+              nixpkgs.overlays = [ self.overlays.pinned ];
               boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
               # Binary cache
