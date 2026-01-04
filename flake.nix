@@ -25,7 +25,7 @@
       home-manager,
       nixpkgs,
       nur,
-      self,
+      # self,
       ...
     }:
     let
