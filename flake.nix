@@ -47,7 +47,7 @@
           (
             { pkgs, ... }:
             {
-              nixpkgs.overlays = [ self.overlays.pinned ];
+              nixpkgs.overlays = [ inputs.nix-cachyos-kernel.inputs.overlays.pinned ];
               boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
               # Binary cache
