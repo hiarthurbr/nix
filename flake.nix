@@ -2,6 +2,7 @@
   description = "flake for hiarthurbr with Home Manager enabled";
 
   inputs = {
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -19,20 +20,43 @@
     };
   };
 
-  outputs = inputs@{ home-manager, nixpkgs, nur, ... }:
+  outputs =
+    inputs@{
+      home-manager,
+      nixpkgs,
+      nur,
+      self,
+      ...
+    }:
     let
       env = import ./env.nix;
 
       unstable = import inputs.nixpkgs-unstable {
         system = env.system;
-        config = { allowFree = true; };
+        config = {
+          allowFree = true;
+        };
       };
-    in {
+    in
+    {
       nixosConfigurations."${env.systemName}" = nixpkgs.lib.nixosSystem {
         system = env.system;
         specialArgs = { inherit inputs unstable env; };
 
         modules = [
+          (
+            { pkgs, ... }:
+            {
+              nixpkgs.overlays = [ self.overlays.pinned ];
+              boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+
+              # Binary cache
+              nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
+              nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+
+              # ... your other configs
+            }
+          )
           ./configuration.nix
           nur.modules.nixos.default
           nur.legacyPackages."${env.system}".repos.iopq.modules.xraya
@@ -68,19 +92,30 @@
               imports = [
                 # ./users/${username}/home.nix
                 # { pkgs, system, inputs, env, unstable, config, lib, specialArgs, options, modulesPath, _class, nixosConfig, osConfig, osClass }
-                (args@{ pkgs, lib, ... }:
-                  let mod = (args // { inherit pkgs; });
-                  in (import ./users/${username}/home.nix mod) // {
+                (
+                  args@{ pkgs, lib, ... }:
+                  let
+                    mod = (args // { inherit pkgs; });
+                  in
+                  (import ./users/${username}/home.nix mod)
+                  // {
                     home.packages = import ./users/${username}/packages.nix mod;
-                    programs = lib.attrsets.mapAttrs' (name: _:
-                      lib.attrsets.nameValuePair
-                      (builtins.substring 0 (builtins.stringLength name - 4)
-                        name) (import ./users/${username}/programs/${name} mod))
-                      (if builtins.pathExists ./users/${username}/programs then
-                        (builtins.readDir ./users/${username}/programs)
-                      else
-                        { });
-                  })
+                    programs =
+                      lib.attrsets.mapAttrs'
+                        (
+                          name: _:
+                          lib.attrsets.nameValuePair (builtins.substring 0 (builtins.stringLength name - 4) name) (
+                            import ./users/${username}/programs/${name} mod
+                          )
+                        )
+                        (
+                          if builtins.pathExists ./users/${username}/programs then
+                            (builtins.readDir ./users/${username}/programs)
+                          else
+                            { }
+                        );
+                  }
+                )
               ];
             }) (builtins.readDir ./users);
           }
