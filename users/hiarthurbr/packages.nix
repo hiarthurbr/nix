@@ -14,7 +14,7 @@ with pkgs;
 
   # IDEs
   jetbrains.rust-rover
-  jetbrains.idea-community
+  jetbrains.idea
   unstable.zed-editor
   evil-helix
 
