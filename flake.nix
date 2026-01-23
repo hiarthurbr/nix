@@ -51,19 +51,19 @@
         };
 
         modules = [
-          (
-            { pkgs, ... }:
-            {
-              nixpkgs.overlays = [ self.overlays.pinned ];
-              boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+          # (
+          #   { pkgs, ... }:
+          #   {
+          #     nixpkgs.overlays = [ self.overlays.pinned ];
+          #     boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
-              # Binary cache
-              nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-              nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+          #     # Binary cache
+          #     nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
+          #     nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
 
-              # ... your other configs
-            }
-          )
+          #     # ... your other configs
+          #   }
+          # )
           ./configuration.nix
           nur.modules.nixos.default
           nur.legacyPackages."${env.system}".repos.iopq.modules.xraya

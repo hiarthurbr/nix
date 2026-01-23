@@ -1,5 +1,12 @@
-{ pkgs, unstable, env, inputs, ... }:
-with pkgs; [
+{
+  pkgs,
+  unstable,
+  env,
+  inputs,
+  ...
+}:
+with pkgs;
+[
   # Terminals
   kitty
   ghostty
@@ -7,6 +14,7 @@ with pkgs; [
 
   # IDEs
   jetbrains.rust-rover
+  jetbrains.idea-community
   unstable.zed-editor
   evil-helix
 
