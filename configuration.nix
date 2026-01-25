@@ -10,7 +10,6 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
-  nixpkgs.config.allowUnfree = true;
   swapDevices = [{
     device = "/swapfile";
     size = 16 * 1024; # 16GB
@@ -209,6 +208,7 @@
     execWheelOnly = false;
   };
 
+  nixpkgs.config.allowUnfree = true;
   programs = {
     nix-ld.enable = true;
     nix-ld.libraries = with pkgs; [ libusb1 ];
@@ -216,7 +216,6 @@
     firefox.enable = true;
   };
 
-  # Allow unfree packages
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];

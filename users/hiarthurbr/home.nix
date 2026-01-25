@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
   gtk.cursorTheme.package = pkgs.posy-cursors;
 
   dconf = {
