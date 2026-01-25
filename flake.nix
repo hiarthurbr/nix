@@ -31,7 +31,7 @@
     let
       env = import ./env.nix;
 
-      pkgs = import inputs.nixpkgs {
+      nixpkgs.pkgs = import inputs.nixpkgs {
         system = env.system;
         config = {
           allowUnfree = env.allowUnfree;
