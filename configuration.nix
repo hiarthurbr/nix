@@ -208,11 +208,12 @@
     execWheelOnly = false;
   };
 
-  # Install firefox.
-  programs.firefox.enable = false;
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [ libusb1 ];
+  programs = {
+    nix-ld.enable = true;
+    nix-ld.libraries = with pkgs; [ libusb1 ];
+    steam.enabled = true;
+    firefox.enabled = true
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
