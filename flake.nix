@@ -50,7 +50,7 @@
             ;
         };
 
-        nixpkgs.config.allowFree = true;
+        nixpkgs.config.allowUnfree = true;
 
         modules = [
           # (
