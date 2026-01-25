@@ -10,7 +10,7 @@ with pkgs;
   # Terminals
   kitty
   ghostty
-  warp-terminal
+# warp-terminal
 
   # IDEs
   jetbrains.rust-rover
