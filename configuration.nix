@@ -208,7 +208,6 @@
     execWheelOnly = false;
   };
 
-  nixpkgs.config.allowUnfree = true;
   programs = {
     nix-ld.enable = true;
     nix-ld.libraries = with pkgs; [ libusb1 ];

@@ -2,6 +2,7 @@
   trusted-users = [ "root" "hiarthurbr" ];
   system = "x86_64-linux";
   systemName = "hiarthurbr-nixos";
+  allowUnfree = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

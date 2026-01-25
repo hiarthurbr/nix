@@ -23,7 +23,6 @@
   outputs =
     inputs@{
       home-manager,
-      nixpkgs,
       nur,
       self,
       ...
@@ -31,10 +30,17 @@
     let
       env = import ./env.nix;
 
+      nixpkgs = import inputs.nixpkgs {
+        system = env.system;
+        config = {
+          allowUnfree = env.allowUnfree;
+        };
+      };
+
       unstable = import inputs.nixpkgs-unstable {
         system = env.system;
         config = {
-          allowFree = true;
+          allowUnfree = env.allowUnfree;
         };
       };
     in
@@ -64,7 +70,6 @@
           #     # ... your other configs
           #   }
           # )
-          { nixpkgs.config.allowUnfree = true; }
           ./configuration.nix
           nur.modules.nixos.default
           nur.legacyPackages."${env.system}".repos.iopq.modules.xraya
