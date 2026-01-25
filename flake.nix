@@ -23,7 +23,7 @@
   outputs =
     inputs@{
       home-manager,
-      nixpkgs,
+      nixpkgs: _nix,
       nur,
       self,
       ...
@@ -31,10 +31,12 @@
     let
       env = import ./env.nix;
 
-      nixpkgs.pkgs = import inputs.nixpkgs {
-        system = env.system;
-        config = {
-          allowUnfree = env.allowUnfree;
+      nixpkgs = _nix // {
+        pkgs = import inputs.nixpkgs {
+          system = env.system;
+          config = {
+            allowUnfree = env.allowUnfree;
+          };
         };
       };
 
