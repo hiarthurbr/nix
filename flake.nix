@@ -50,8 +50,6 @@
             ;
         };
 
-        nixpkgs.config.allowUnfree = true;
-
         modules = [
           # (
           #   { pkgs, ... }:
@@ -66,6 +64,7 @@
           #     # ... your other configs
           #   }
           # )
+          { nixpkgs.config.allowUnfree = true; }
           ./configuration.nix
           nur.modules.nixos.default
           nur.legacyPackages."${env.system}".repos.iopq.modules.xraya
