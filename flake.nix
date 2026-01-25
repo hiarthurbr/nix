@@ -50,6 +50,8 @@
             ;
         };
 
+        nixpkgs.config.allowFree = true;
+
         modules = [
           # (
           #   { pkgs, ... }:
