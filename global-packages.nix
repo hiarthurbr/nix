@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 with pkgs; [
   git
   wget
@@ -11,7 +11,7 @@ with pkgs; [
   interception-tools-plugins.caps2esc
   fselect
   uutils-coreutils-noprefix
-  (pkgs.unstable.lutris.override {
+  (unstable.lutris.override {
     extraPkgs = pkgs: [
 #               ----
 #      ↓ same var ↑ 

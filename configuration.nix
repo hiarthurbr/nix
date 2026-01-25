@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, env, ... }:
+{ config, pkgs, unstable, inputs, env, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -230,7 +230,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = import ./global-packages.nix { inherit pkgs; };
+  environment.systemPackages = import ./global-packages.nix { inherit pkgs unstable; };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
