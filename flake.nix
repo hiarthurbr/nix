@@ -31,14 +31,14 @@
     let
       env = import ./env.nix;
 
-      nixpkgs = {
-        pkgs = import inputs.nixpkgs {
-          system = env.system;
-          config = {
-            allowUnfree = env.allowUnfree;
-          };
-        };
-      } // nixpkgs;
+ #     nixpkgs = {
+ #       pkgs = import inputs.nixpkgs {
+ #         system = env.system;
+#          config = {
+#            allowUnfree = env.allowUnfree;
+#          };
+#        };
+#      } // nixpkgs;
 
       unstable = import inputs.nixpkgs-unstable {
         system = env.system;
