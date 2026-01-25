@@ -10,6 +10,7 @@
     inputs.sops-nix.nixosModules.sops
   ];
 
+  nixpkgs.config.allowUnfree = true;
   swapDevices = [{
     device = "/swapfile";
     size = 16 * 1024; # 16GB
@@ -216,7 +217,6 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
