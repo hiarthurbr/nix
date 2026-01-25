@@ -23,6 +23,7 @@
   outputs =
     inputs@{
       home-manager,
+      nixpkgs,
       nur,
       self,
       ...
@@ -30,7 +31,7 @@
     let
       env = import ./env.nix;
 
-      nixpkgs = import inputs.nixpkgs {
+      pkgs = import inputs.nixpkgs {
         system = env.system;
         config = {
           allowUnfree = env.allowUnfree;
@@ -49,6 +50,7 @@
         system = env.system;
         specialArgs = {
           inherit
+            pkgs
             inputs
             unstable
             env
