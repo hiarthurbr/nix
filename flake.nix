@@ -50,7 +50,6 @@
         system = env.system;
         specialArgs = {
           inherit
-            pkgs
             inputs
             unstable
             env
