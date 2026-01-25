@@ -212,7 +212,7 @@
     nix-ld.enable = true;
     nix-ld.libraries = with pkgs; [ libusb1 ];
     steam.enabled = true;
-    firefox.enabled = true
+    firefox.enabled = true;
   };
 
   # Allow unfree packages
