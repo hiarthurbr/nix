@@ -22,11 +22,11 @@
 
   networking.hostName = env.systemName; # Define your hostname.
   networking.firewall.allowedTCPPortRanges = [{
-    from = 1024;
+    from = 1;
     to = 65535;
   }];
   networking.firewall.allowedUDPPortRanges = [{
-    from = 1024;
+    from = 1;
     to = 65535;
   }];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
