@@ -71,6 +71,7 @@ with pkgs;
   pavucontrol
   easyeffects
   spotify
+  httpie
 
   # Fonts
   commit-mono
