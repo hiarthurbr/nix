@@ -212,8 +212,12 @@
   programs = {
     nix-ld.enable = true;
     nix-ld.libraries = with pkgs; [ libusb1 ];
-#   steam.enable = true;
+    steam.enable = true;
     firefox.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [ icu ];
+    };
   };
 
   nix = {
