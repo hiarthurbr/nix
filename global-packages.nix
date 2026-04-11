@@ -16,7 +16,7 @@ with pkgs; [
 #               ----
 #      ↓ same var ↑ 
 #     ---- 
-      pkgs.wineWowPackages.stagingFull
+      pkgs.wineWow64Packages.stagingFull
       pkgs.winetricks
     ];
   })
