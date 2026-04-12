@@ -56,7 +56,6 @@ with pkgs;
   htop
   btop
   mprocs
-  discordo
   spotify-player
 
   # Apps
