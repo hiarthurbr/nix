@@ -216,7 +216,7 @@
       enable = true;
       libraries = with pkgs; [ icu libusb1 ];
     };
-    git.signing.format = null;
+    # git.signing.format = null;
   };
 
   nix = {
