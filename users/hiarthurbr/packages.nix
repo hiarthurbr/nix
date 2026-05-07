@@ -7,10 +7,6 @@
 }:
 with pkgs;
 [
-  # Terminals
-  kitty
-  ghostty
-  warp-terminal
 
   # IDEs
   jetbrains.rust-rover
@@ -22,19 +18,10 @@ with pkgs;
   inputs.zen-browser.packages."${env.system}".twilight
   nur.repos.Ev357.helium
 
-  # Shells
-  fish
-  nushell
-
   # Shell stuff
-  eza
-  zoxide
   xh
-  zellij
   dust
   dua
-  yazi
-  starship
   hyfetch
   fastfetch
 
@@ -50,7 +37,6 @@ with pkgs;
   tokei
   just
   kondo
-  devenv
 
   # General CLI/TUI stuff
   htop
@@ -74,6 +60,11 @@ with pkgs;
 
   # Fonts
   commit-mono
+  nerd-fonts.commit-mono
+  nerd-fonts.caskaydia-mono
+  nerd-fonts.caskaydia-cove
+  nerd-fonts.geist-mono
+  nerd-fonts.jetbrains-mono
 
   # Gnome extensions
   gnomeExtensions.blur-my-shell
