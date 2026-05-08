@@ -184,10 +184,10 @@
   services.openssh = {
     enable = true;
     settings = {
-      # kexAlgorithms = [ "curve25519-sha256" ];
-      # ciphers = [ "chacha20-poly1305@openssh.com" ];
-      # passwordAuthentication = false;
-      # permitRootLogin = "no";
+      kexAlgorithms = [ "curve25519-sha256" ];
+      ciphers = [ "chacha20-poly1305@openssh.com" ];
+      passwordAuthentication = false;
+      permitRootLogin = "no";
     };
     hostKeys = [
       {
@@ -224,10 +224,6 @@
       experimental-features = [ "nix-command" "flakes" ];
       trusted-users = env.trusted-users;
     };
-    extraOptions = ''
-      extra-substituters = https://devenv.cachix.org
-      extra-trusted-public-keys = devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=
-    '';
   };
 
   # List packages installed in system profile. To search, run:
@@ -243,9 +239,6 @@
   # };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
