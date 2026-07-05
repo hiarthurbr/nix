@@ -217,7 +217,16 @@
       libraries = with pkgs; [ icu libusb1 ];
     };
     niri.enable = true;
-    dms-shell.enable = true;
+    dms-shell = {
+      enable = true;
+
+      systemd = {
+        enable = true;
+      };
+
+      enableDynamicTheming = true;
+      enableClipboardPaste = true;
+    };
     # git.signing.format = null;
   };
 
