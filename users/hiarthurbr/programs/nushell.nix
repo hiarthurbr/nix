@@ -18,6 +18,6 @@
   envFile.source = ../assets/env.nu;
   extraConfig = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/nushell/nu_scripts/32cd1d53649bc024edd65326a5b988cd7bcf4810/nu-hooks/nu-hooks/direnv/direnv.nu";
-    sha256 = "";
+    sha256 = "1crfrq1rsybz8mfbivj2392gblid43fpbz0axmx4q2rwjkf3v8fc";
   };
 }
