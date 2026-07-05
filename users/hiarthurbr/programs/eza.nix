@@ -1,4 +1,4 @@
 { ... }: {
-	enable = true;
-	enableNushellIntegration = true;
+	# enable = true;
+	# enableNushellIntegration = true;
 }
