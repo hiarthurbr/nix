@@ -94,6 +94,11 @@
 
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "niri";
+  };
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
