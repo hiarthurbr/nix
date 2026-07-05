@@ -57,6 +57,7 @@ with pkgs;
   easyeffects
   spotify
   unstable.httpie-desktop
+  alacritty
 
   # Fonts
   commit-mono
