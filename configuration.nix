@@ -185,7 +185,7 @@
     enable = true;
     settings = {
       kexAlgorithms = [ "curve25519-sha256" ];
-      ciphers = [ "chacha20-poly1305@openssh.com" ];
+      ciphers = "chacha20-poly1305@openssh.com";
       passwordAuthentication = false;
       permitRootLogin = "no";
     };
