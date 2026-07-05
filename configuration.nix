@@ -56,100 +56,120 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  # services.displayManager.gdm.enable = true;
-  # services.desktopManager.gnome.enable = true;
-
-  services.interception-tools = {
-    enable = true;
-    plugins = [ pkgs.interception-tools-plugins.caps2esc ];
-    udevmonConfig = ''
-      - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
-        DEVICE:
-          EVENTS:
-            EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-    '';
-  };
-
-  # Notebook keymap
-  # services.xserver.xkb = {
-  #   layout = "br";
-  #   variant = "thinkpad";
-  # };
-
-  # Ajazz keymap
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "intl";
-  };
-
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services = {
+    # Enable the X11 windowing system.
+    # xserver.enable = true;
 
-  services.udev.packages = with pkgs; [ gnome-settings-daemon ];
+    # Enable the GNOME Desktop Environment.
+    # displayManager.gdm.enable = true;
+    # desktopManager.gnome.enable = true;
 
-  services.displayManager.dms-greeter = {
-    enable = true;
-    compositor.name = "niri";
+    interception-tools = {
+      enable = true;
+      plugins = [ pkgs.interception-tools-plugins.caps2esc ];
+      udevmonConfig = ''
+        - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+          DEVICE:
+            EVENTS:
+              EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
+      '';
+    };
+
+    # Notebook keymap
+    # xserver.xkb = {
+    #   layout = "br";
+    #   variant = "thinkpad";
+    # };
+
+    # Ajazz keymap
+    xserver.xkb = {
+      layout = "us";
+      variant = "intl";
+    };
+    printing.enable = true;
+    udev.packages = with pkgs; [ gnome-settings-daemon ];
+    displayManager.dms-greeter = {
+      enable = true;
+      compositor.name = "niri";
+    };
+    pulseaudio.enable = false;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      jack.enable = true;
+
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+
+      # extraConfig.pipewire.vban = {
+      #   "context.modules" = [
+      #     {
+      #       name = "libpipewire-module-vban-send";
+      #       args = {
+      #         #local.ifname = "eth0"
+      #         #source.ip = "0.0.0.0"
+      #         "destination.ip" = "10.0.0.2";
+      #         "destination.port" = 6980;
+      #         #net.mtu = 1500
+      #         #net.ttl = 1
+      #         #net.loop = false
+      #         #sess.min-ptime = 2
+      #         #sess.max-ptime = 20
+      #         #sess.name = "PipeWire VBAN stream"
+      #         #sess.media = "audio"
+      #         #audio.format = "S16LE"
+      #         #audio.rate = 44100
+      #         #audio.channels = 2
+      #         #audio.position = [ FL FR ]
+      #         "stream.props" = {
+      #           "node.name" = "nixos";
+      #         };
+      #       };
+      #     }
+      #   ];
+      # };
+    };
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+
+    zerotierone = {
+      enable = true;
+      joinNetworks = [ "9bee8941b58a36d3" ];
+    };
+
+    openssh = {
+      enable = true;
+      settings = {
+        KexAlgorithms = [ "curve25519-sha256" ];
+        Ciphers = [ "chacha20-poly1305@openssh.com" ];
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+      };
+      hostKeys = [
+        {
+          bits = 4096;
+          path = config.sops.secrets.host-rsa-private-key.path;
+          type = "rsa";
+        }
+        {
+          path = config.sops.secrets.host-ed25519-private-key.path;
+          type = "ed25519";
+        }
+      ];
+    };
   };
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-
-    # extraConfig.pipewire.vban = {
-    #   "context.modules" = [
-    #     {
-    #       name = "libpipewire-module-vban-send";
-    #       args = {
-    #         #local.ifname = "eth0"
-    #         #source.ip = "0.0.0.0"
-    #         "destination.ip" = "10.0.0.2";
-    #         "destination.port" = 6980;
-    #         #net.mtu = 1500
-    #         #net.ttl = 1
-    #         #net.loop = false
-    #         #sess.min-ptime = 2
-    #         #sess.max-ptime = 20
-    #         #sess.name = "PipeWire VBAN stream"
-    #         #sess.media = "audio"
-    #         #audio.format = "S16LE"
-    #         #audio.rate = 44100
-    #         #audio.channels = 2
-    #         #audio.position = [ FL FR ]
-    #         "stream.props" = {
-    #           "node.name" = "nixos";
-    #         };
-    #       };
-    #     }
-    #   ];
-    # };
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = [ "9bee8941b58a36d3" ];
-  };
 
   sops.defaultSopsFile = ./secrets/hiarthurbr.yaml;
   sops.defaultSopsFormat = "yaml";
@@ -186,27 +206,6 @@
         hashedPasswordFile = ''config.sops.secrets."${username}/pwd".path'';
       })) (builtins.readDir ./users));
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      KexAlgorithms = [ "curve25519-sha256" ];
-      Ciphers = [ "chacha20-poly1305@openssh.com" ];
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-    };
-    hostKeys = [
-      {
-        bits = 4096;
-        path = config.sops.secrets.host-rsa-private-key.path;
-        type = "rsa";
-      }
-      {
-        path = config.sops.secrets.host-ed25519-private-key.path;
-        type = "ed25519";
-      }
-    ];
-  };
-
   security.sudo.enable = false;
   security.sudo-rs = {
     enable = true;
@@ -231,6 +230,14 @@
 
       enableDynamicTheming = true;
       enableClipboardPaste = true;
+    };
+    dsearch = {
+      enable = true;
+
+      systemd = {
+        enable = true;
+        target = "default.target";
+      };
     };
     # git.signing.format = null;
   };
