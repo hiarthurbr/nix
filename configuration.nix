@@ -57,11 +57,11 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  # services.displayManager.gdm.enable = true;
+  # services.desktopManager.gnome.enable = true;
 
   services.interception-tools = {
     enable = true;
@@ -216,6 +216,7 @@
       enable = true;
       libraries = with pkgs; [ icu libusb1 ];
     };
+    niri.enable = true;
     # git.signing.format = null;
   };
 
