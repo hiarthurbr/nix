@@ -47,7 +47,7 @@ with pkgs;
   # Apps
   protonmail-bridge
   protonmail-bridge-gui
-  protonvpn-gui
+  proton-vpn
   proton-pass
   discord
   prismlauncher
