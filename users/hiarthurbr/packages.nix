@@ -67,15 +67,6 @@ with pkgs;
   nerd-fonts.geist-mono
   nerd-fonts.jetbrains-mono
 
-  # Gnome extensions
-  gnomeExtensions.blur-my-shell
-  gnomeExtensions.just-perfection
-  gnomeExtensions.arc-menu
-  gnomeExtensions.appindicator
-  gnomeExtensions.dash-to-dock
-  gnomeExtensions.applications-menu
-  gnomeExtensions.top-bar-organizer
-  gnomeExtensions.astra-monitor
-  gnomeExtensions.dash2dock-lite
-  gnomeExtensions.custom-window-controls
+  # extensions
+  valent
 ]
