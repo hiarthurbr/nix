@@ -217,6 +217,7 @@
       libraries = with pkgs; [ icu libusb1 ];
     };
     niri.enable = true;
+    dms-shell.enable = true;
     # git.signing.format = null;
   };
 
