@@ -3,7 +3,7 @@
 {
   gtk.cursorTheme.package = pkgs.posy-cursors;
 
-  # home.shell.enableNushellIntegration = true;
+  home.shell.enableNushellIntegration = true;
 
   dconf = {
     enable = true;
