@@ -184,8 +184,8 @@
   services.openssh = {
     enable = true;
     settings = {
-      KexAlgorithms = "curve25519-sha256";
-      Ciphers = "chacha20-poly1305@openssh.com";
+      KexAlgorithms = [ "curve25519-sha256" ];
+      Ciphers = [ "chacha20-poly1305@openssh.com" ];
       PasswordAuthentication = false;
       PermitRootLogin = "no";
     };
