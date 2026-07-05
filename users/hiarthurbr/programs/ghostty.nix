@@ -1,5 +1,5 @@
 { ... }: {
 	enable = true;
 	installBatSyntax = true;
-	# systemd.enable = true;
+	systemd.enable = true;
 }

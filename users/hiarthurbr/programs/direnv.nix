@@ -1,5 +1,5 @@
 { ... }: {
-	# enable = true;
-	# enableNushellIntegration = true;
-	# nix-direnv.enable = true;
+	enable = true;
+	enableNushellIntegration = true;
+	nix-direnv.enable = true;
 }

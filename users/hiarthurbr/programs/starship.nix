@@ -1,5 +1,5 @@
 { ... }: {
 	enable = true;
-	# enableNushellIntegration = true;
-	# presets = [ "nerd-font-symbols" ];
+	enableNushellIntegration = true;
+	presets = [ "nerd-font-symbols" ];
 }
