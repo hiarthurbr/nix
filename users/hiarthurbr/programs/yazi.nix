@@ -1,5 +1,5 @@
 { ... }: {
 	enable = true;
 	enableNushellIntegration = true;
-	shellWrapperName = "y"
+	shellWrapperName = "y";
 }
