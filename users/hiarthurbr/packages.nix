@@ -58,6 +58,8 @@ with pkgs;
   spotify
   unstable.httpie-desktop
   alacritty
+  foot
+  ncspot
 
   # Fonts
   commit-mono

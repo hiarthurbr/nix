@@ -79,16 +79,17 @@
     };
 
     # Notebook keymap
-    # xserver.xkb = {
-    #   layout = "br";
-    #   variant = "thinkpad";
-    # };
+    xserver.xkb = {
+      layout = "br";
+      variant = "thinkpad";
+    };
 
     # Ajazz keymap
-    xserver.xkb = {
-      layout = "us";
-      variant = "intl";
-    };
+    # xserver.xkb = {
+    #   layout = "us";
+    #   variant = "intl";
+    # };
+
     printing.enable = true;
     udev.packages = with pkgs; [ gnome-settings-daemon ];
     displayManager.dms-greeter = {
