@@ -240,6 +240,10 @@
       };
     };
     # git.signing.format = null;
+    kdeconnect = {
+      enable = true;
+      package = pkgs.valent;
+    };
   };
 
   nix = {

@@ -10,6 +10,7 @@ with pkgs; [
   interception-tools
   interception-tools-plugins.caps2esc
   fselect
+  fuzzel
   uutils-coreutils-noprefix
   (unstable.lutris.override {
     extraPkgs = pkgs: [
