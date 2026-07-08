@@ -13,6 +13,7 @@ with pkgs;
   jetbrains.idea
   unstable.zed-editor
   evil-helix
+  vscode
 
   # Browsers
   inputs.zen-browser.packages."${env.system}".twilight
