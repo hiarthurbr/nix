@@ -6,7 +6,7 @@
 	config = {
 		global = {
 			hide_env_diff = true;
-			log_format = builtins.fromJSON "\u001B[2m" + "direnv: %s" + builtins.fromJSON "\u001B[0m";
+			log_format = "\\u001B[2mdirenv: %s\\u001B[0m";
 		};
 	};
 }
