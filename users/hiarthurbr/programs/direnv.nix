@@ -6,7 +6,9 @@
 	config = {
 		global = {
 			hide_env_diff = true;
-			log_format = "\\u001B[2mdirenv: %s\\u001B[0m";
+			log_format = ''
+				\033[2mdirenv: %s\033[0m
+			'';
 		};
 	};
 }
