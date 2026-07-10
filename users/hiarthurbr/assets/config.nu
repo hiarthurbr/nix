@@ -1,5 +1,10 @@
 $env.config.show_banner = false;
 
+def crane-init [] {
+  nix flake init --template github:ipetkov/crane#quick-start-simple;
+  "use flake" | save .envrc;
+}
+
 def commit-all [message: string] {
   git add .
   git commit -S -m $message
