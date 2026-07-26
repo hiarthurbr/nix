@@ -173,7 +173,7 @@
       settings = {
         INTERNET_IFACE = "enp3s0f3u4";
         WIFI_IFACE = "wlp2s0";
-        SSDI = "Pombo de vigilância #2845";
+        SSID = "Pombo de vigilância #2845";
         PASSPHRASE = "127.0.0.1";
       };
     };
