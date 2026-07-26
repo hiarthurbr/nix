@@ -171,7 +171,7 @@
     create_ap = {
       enable = true;
       settings = {
-        INTERNET_IFACE = "zt3jnqg53g";
+        INTERNET_IFACE = "enp3s0f3u4";
         WIFI_IFACE = "wlp2s0";
         SSDI = "Pombo de vigilância #2845";
         PASSPHRASE = "127.0.0.1";
