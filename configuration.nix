@@ -227,15 +227,6 @@
   programs = {
     steam.enable = true;
     firefox.enable = true;
-    nh = {
-      enable = true;
-      clean = {
-        enable = true;
-        extraArgs = "--keep-since 2w --keep 10 --optimise";
-        dates = "daily";
-      };
-      flake = "${config.home.homeDirectory}/nix";
-    };
     nix-ld = {
       enable = true;
       libraries = with pkgs; [ icu libusb1 ];
