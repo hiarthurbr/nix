@@ -170,6 +170,9 @@
 
     create_ap = {
       enable = true;
+
+      extraArgs = [ "--no-virt" ];
+
       settings = {
         INTERNET_IFACE = "enp3s0f3u4";
         WIFI_IFACE = "wlp2s0";
