@@ -68,6 +68,11 @@
   #   };
   # };
 
+  systemd.services."rfkill-unblock@all".override = {
+    after = [ "sys-subsystem-net-devices-phy0.device" "systemd-rfkill.service" ];
+    requires = [ "sys-subsystem-net-devices-wlan0.device" ];
+  };
+
   services = {
     # Enable the X11 windowing system.
     # xserver.enable = true;
