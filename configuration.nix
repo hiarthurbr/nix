@@ -59,14 +59,14 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
-  system.activationScripts = {
-    rfkillUnblockWlan = {
-      text = ''
-      rfkill unblock wlan
-      '';
-      deps = [];
-    };
-  };
+  # system.activationScripts = {
+  #   rfkillUnblockWlan = {
+  #     text = ''
+  #     rfkill unblock wlan
+  #     '';
+  #     deps = [];
+  #   };
+  # };
 
   services = {
     # Enable the X11 windowing system.
