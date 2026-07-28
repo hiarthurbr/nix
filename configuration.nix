@@ -59,8 +59,16 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
-  systemd.services.systemd-rfkill.enable = false;
-  systemd.sockets.systemd-rfkill.enable = false;
+  systemd.services.rfkill-unblock-wifi = {
+    description = "Unblock Wi-Fi at boot";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "systemd-rfkill.service" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.util-linux}/bin/rfkill unblock wifi";
+    };
+  };
 
   services = {
     # Enable the X11 windowing system.
