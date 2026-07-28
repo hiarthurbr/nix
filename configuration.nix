@@ -68,7 +68,7 @@
   #   };
   # };
 
-  systemd.services."rfkill-unblock@all".override = {
+  systemd.services."rfkill-unblock@all" = {
     after = [ "sys-subsystem-net-devices-phy0.device" "systemd-rfkill.service" ];
     requires = [ "sys-subsystem-net-devices-wlan0.device" ];
   };
