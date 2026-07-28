@@ -59,14 +59,12 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
-  systemd.services.rfkill-unblock-wifi = {
-    description = "Unblock Wi-Fi at boot";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "systemd-rfkill.service" ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.util-linux}/bin/rfkill unblock wifi";
+  system.activationScripts = {
+    rfkillUnblockWlan = {
+      text = ''
+      rfkill unblock wlan
+      '';
+      deps = [];
     };
   };
 
