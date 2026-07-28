@@ -59,6 +59,9 @@
   # Configure console keymap
   console.keyMap = "br-abnt2";
 
+  systemd.services.systemd-rfkill.enable = false;
+  systemd.services.systemd-rfkill.socket.enable = false;
+
   services = {
     # Enable the X11 windowing system.
     # xserver.enable = true;
