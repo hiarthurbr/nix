@@ -68,8 +68,7 @@
   #   };
   # };
 
-  systemd.services.systemd-rfkill.service.enable = true;
-  systemd.services.systemd-rfkill.socket.enable = true;
+  systemd.services.systemd-rfkill.enable = true;
 
   services = {
     # Enable the X11 windowing system.
