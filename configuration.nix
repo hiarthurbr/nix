@@ -68,10 +68,8 @@
   #   };
   # };
 
-  systemd.services."rfkill-unblock@all" = {
-    after = [ "sys-subsystem-net-devices-phy0.device" "systemd-rfkill.service" ];
-    requires = [ "sys-subsystem-net-devices-wlan0.device" ];
-  };
+  systemd.services.systemd-rfkill.service.enable = true;
+  systemd.services.systemd-rfkill.socket.enable = true;
 
   services = {
     # Enable the X11 windowing system.
