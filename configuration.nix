@@ -68,17 +68,7 @@
   #   };
   # };
 
-  boot.blacklistedKernelModules = [ "ideapad_laptop" ];
-
-  systemd.services.rfkill-unblock = {
-    description = "Unblock all rfkill devices";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "systemd-udev-settle.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.net-tools}/bin/rfkill unblock all";
-    };
-  };
+  systemd.services.systemd-rfkill.enable = true;
 
   services = {
     # Enable the X11 windowing system.
