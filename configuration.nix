@@ -76,7 +76,7 @@
     after = [ "systemd-udev-settle.service" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.rfkill}/bin/rfkill unblock all";
+      ExecStart = "${pkgs.net-tools}/bin/rfkill unblock all";
     };
   };
 
