@@ -9,8 +9,8 @@ with pkgs;
 [
 
   # IDEs
-  jetbrains.rust-rover
-  jetbrains.idea
+  # jetbrains.rust-rover
+  # jetbrains.idea
   unstable.zed-editor
   evil-helix
   vscode
