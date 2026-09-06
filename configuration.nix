@@ -202,6 +202,12 @@
         # Recommended for fast zlib compression
         # https://www.home-assistant.io/integrations/isal
         "isal"
+
+        "getmac"
+        "aiohue"
+        "aiowebostv"
+        "pychromecast"
+        "huawei_lte_api"
       ];
       config = {
         # Includes dependencies for a basic setup
