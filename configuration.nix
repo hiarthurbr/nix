@@ -203,11 +203,12 @@
         # https://www.home-assistant.io/integrations/isal
         "isal"
 
-        "getmac"
-        "aiohue"
-        "aiowebostv"
-        "pychromecast"
-        "huawei_lte_api"
+        "lastfm"
+        "openrgb"
+        "spotify"
+        "steam_online"
+        "hue"
+        "huawei_lte"
       ];
       config = {
         # Includes dependencies for a basic setup
