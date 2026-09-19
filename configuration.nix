@@ -19,6 +19,11 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
+  boot.systemd.initrd = true;
+
+  boot.kernelParams = [
+    "drm.panic_screen=1"
+  ];
 
   networking.hostName = env.systemName; # Define your hostname.
   networking.firewall.allowedTCPPortRanges = [{
