@@ -61,7 +61,7 @@ with pkgs;
   alacritty
   foot
   ncspot
-  modrinth-app
+  # modrinth-app
 
   # Fonts
   commit-mono
