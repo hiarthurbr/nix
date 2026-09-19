@@ -184,7 +184,7 @@
     };
 
     create_ap = {
-      enable = true;
+      # enable = true;
 
       settings = {
         INTERNET_IFACE = "enp3s0f3u4";
@@ -195,7 +195,7 @@
     };
 
     home-assistant = {
-      enable = true;
+      # enable = true;
       extraComponents = [
         # Components required to complete the onboarding
         "analytics"
@@ -268,7 +268,7 @@
 
   nixpkgs.config.allowUnfree = env.allowUnfree;
   programs = {
-    steam.enable = true;
+    # steam.enable = true;
     firefox.enable = true;
     nix-ld = {
       enable = true;
